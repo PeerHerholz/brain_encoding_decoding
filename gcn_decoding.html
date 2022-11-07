@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain decoding with GCN &#8212; Introduction to brain encoding and decoding in fMRI</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/gcn_decoding.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Brain encoding" href="encoding.html" />
+    <link rel="prev" title="Brain decoding with MLP" href="mlp_decoding.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Introduction to brain encoding and decoding in fMRI</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="haxby_data.html">
+   The Haxby dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="svm_decoding.html">
+   Brain decoding with SVM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mlp_decoding.html">
+   Brain decoding with MLP
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Brain decoding with GCN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="encoding.html">
+   Brain encoding
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/gcn_decoding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/gcn_decoding.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/main-educational/brain_encoding_decoding"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fgcn_decoding.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/gcn_decoding.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/gcn_decoding.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
+   Graph Convolution Network (GCN)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-the-data">
+   Getting the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extract-time-series-from-a-full-brain-atlas">
+   Extract time series from a full brain atlas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-learning-for-estimating-brain-networks">
+     Dictionary learning for estimating brain networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#region-extraction-from-network-components">
+     Region extraction from network components
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
+   Create brain graph for GCN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">
+   Preparing the dataset for model training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-a-gcn-model">
+   Generating a GCN model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-and-evaluating-the-model">
+   Train and evaluating the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Brain decoding with GCN</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-convolution-network-gcn">
+   Graph Convolution Network (GCN)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-the-data">
+   Getting the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extract-time-series-from-a-full-brain-atlas">
+   Extract time series from a full brain atlas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-learning-for-estimating-brain-networks">
+     Dictionary learning for estimating brain networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#region-extraction-from-network-components">
+     Region extraction from network components
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-brain-graph-for-gcn">
+   Create brain graph for GCN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-the-dataset-for-model-training">
+   Preparing the dataset for model training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generating-a-gcn-model">
+   Generating a GCN model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-and-evaluating-the-model">
+   Train and evaluating the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="brain-decoding-with-gcn">
+<h1>Brain decoding with GCN<a class="headerlink" href="#brain-decoding-with-gcn" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="graph-convolution-network-gcn">
+<h2>Graph Convolution Network (GCN)<a class="headerlink" href="#graph-convolution-network-gcn" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="gcn-pipeline-fig">
+<a class="reference internal image-reference" href="_images/GCN_pipeline.png"><img alt="_images/GCN_pipeline.png" src="_images/GCN_pipeline.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Schematic of the analysis proposed in Zhang and colleagues (2021).
+The full time series are used to constrcut the brain graph to a network representation of brain organization by associating nodes to brain regions and defining edges via functional connections.</span><a class="headerlink" href="#gcn-pipeline-fig" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="getting-the-data">
+<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
+<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id3">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">The Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
+<div class="cell tag_hide_input tag_hide_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="c1"># We are fetching the data for subject 4</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">sub_no</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="n">sub_no</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
+<span class="n">func_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># cognitive annotations</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">behavioral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">behavioral</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the size of dependent variable <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The generation of brain time series is a little bit more complicated for the GCN framework.
+The GCN framework from Zhang and colleagues (2021) <span id="id2">[<a class="reference internal" href="#id6">ZTTB21</a>]</span> require a full brain graph.</p>
+</div>
+<div class="section" id="extract-time-series-from-a-full-brain-atlas">
+<h2>Extract time series from a full brain atlas<a class="headerlink" href="#extract-time-series-from-a-full-brain-atlas" title="Permalink to this headline">¶</a></h2>
+<p>There are two common approaches to define the brain regions: using predefined atlases from published studies or generate from own data.
+As the Haxby dataset is shipped in the native resolution, we cannot easily use an published atlas.<br />
+Here we will demostrate how to use nilearn to generate the brain regions, extract signals, and calculate the brain graph.</p>
+<div class="section" id="dictionary-learning-for-estimating-brain-networks">
+<h3>Dictionary learning for estimating brain networks<a class="headerlink" href="#dictionary-learning-for-estimating-brain-networks" title="Permalink to this headline">¶</a></h3>
+<p>Nilearn provides several methods for data-driven brain network estimation and dictionary learning is one of the robust method.
+Dictionary learning (or sparse coding) is a representation learning method aiming at finding a sparse representation of the input data as a linear combination of basic elements called atoms.
+The identification of these atoms composing the dictionary relies on a sparsity principle:
+maximally sparse representations of the dataset are sought for. Atoms are not required to be orthogonal.</p>
+<p>We use the nilearn function <code class="docutils literal notranslate"><span class="pre">DictLearning</span></code> to estimate networks on the haxby EPI data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nilearn.decomposition</span> <span class="kn">import</span> <span class="n">DictLearning</span>
+
+<span class="c1"># Initialize DictLearning object</span>
+<span class="n">dict_learn</span> <span class="o">=</span> <span class="n">DictLearning</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">smoothing_fwhm</span><span class="o">=</span><span class="mf">6.</span><span class="p">,</span>
+                          <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">t_r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                          <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">memory</span><span class="o">=</span><span class="s2">&quot;nilearn_cache&quot;</span><span class="p">,</span> <span class="n">memory_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Fit to the data</span>
+<span class="n">dict_learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
+<span class="c1"># Resting state networks/maps in attribute `components_img_`</span>
+<span class="n">components_img</span> <span class="o">=</span> <span class="n">dict_learn</span><span class="o">.</span><span class="n">components_img_</span>
+
+<span class="c1"># Visualization of functional networks</span>
+<span class="c1"># Show networks using plotting utilities</span>
+<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">mean_img</span>
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
+<span class="n">mean_haxby</span> <span class="o">=</span> <span class="n">mean_img</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
+<span class="n">plotting</span><span class="o">.</span><span class="n">plot_prob_atlas</span><span class="p">(</span><span class="n">components_img</span><span class="p">,</span> 
+                         <span class="n">bg_img</span><span class="o">=</span><span class="n">mean_haxby</span><span class="p">,</span> 
+                         <span class="n">view_type</span><span class="o">=</span><span class="s1">&#39;filled_contours&#39;</span><span class="p">,</span>
+                         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Dictionary Learning maps&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="region-extraction-from-network-components">
+<h3>Region extraction from network components<a class="headerlink" href="#region-extraction-from-network-components" title="Permalink to this headline">¶</a></h3>
+<p>This approach has been previously used in the neuroscience literature to study the intrinsic organization of brain anatomy and functions.
+The next step is to separate the learned networks into discrete regions.
+Nilearn provides an useful class <code class="docutils literal notranslate"><span class="pre">RegionExtractor</span></code> to extract isolated regions from statistical maps.
+As the networks generated from dictionary learning are denoted by probablilty rather than discrete values,
+we will use <code class="docutils literal notranslate"><span class="pre">RegionExtractor</span></code> to generate a parcellation scheme.</p>
+<div class="tip admonition">
+<p class="admonition-title">Extract connected regions from a brain atlas image defined by labels (integers). </p>
+<p>See function <code class="docutils literal notranslate"><span class="pre">nilearn.regions.connected_label_regions</span></code> and the tutorial on
+<a class="reference external" href="https://nilearn.github.io/auto_examples/06_manipulating_images/plot_extract_regions_labels_image.html#sphx-glr-auto-examples-06-manipulating-images-plot-extract-regions-labels-image-py">Yeo 7 networks</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nilearn.regions</span> <span class="kn">import</span> <span class="n">RegionExtractor</span>
+
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">RegionExtractor</span><span class="p">(</span><span class="n">components_img</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                            <span class="n">thresholding_strategy</span><span class="o">=</span><span class="s1">&#39;ratio_n_voxels&#39;</span><span class="p">,</span>
+                            <span class="n">extractor</span><span class="o">=</span><span class="s1">&#39;local_regions&#39;</span><span class="p">,</span>
+                            <span class="n">low_pass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">high_pass</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">t_r</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                            <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Just call fit() to process for regions extraction</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="c1"># Extracted regions are stored in regions_img_</span>
+<span class="n">regions_extracted_img</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">regions_img_</span>
+<span class="c1"># Each region index is stored in index_</span>
+<span class="n">regions_index</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">index_</span>
+<span class="c1"># Total number of regions extracted</span>
+<span class="n">n_regions_extracted</span> <span class="o">=</span> <span class="n">regions_extracted_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Visualization of region extraction results</span>
+<span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> regions are extracted from </span><span class="si">%d</span><span class="s1"> components.&#39;</span>
+         <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Each separate color of region indicates extracted region&#39;</span>
+         <span class="o">%</span> <span class="p">(</span><span class="n">n_regions_extracted</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">plotting</span><span class="o">.</span><span class="n">plot_prob_atlas</span><span class="p">(</span><span class="n">regions_extracted_img</span><span class="p">,</span> 
+                         <span class="n">bg_img</span><span class="o">=</span><span class="n">mean_haxby</span><span class="p">,</span> 
+                         <span class="n">view_type</span><span class="o">=</span><span class="s1">&#39;filled_contours&#39;</span><span class="p">,</span>
+                         <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we have 1452 time points in the imaging data, and for each time point we have recordings of fMRI activity across 68 brain regions.</p>
+</div>
+</div>
+<div class="section" id="create-brain-graph-for-gcn">
+<h2>Create brain graph for GCN<a class="headerlink" href="#create-brain-graph-for-gcn" title="Permalink to this headline">¶</a></h2>
+<p>A key component of GCN is brain graph.
+Brain graph provides a network representation of brain organization by associating nodes to brain regions and defining edges via anatomical or functional connections.
+After generating time series, we will firstly use the nilearn function to geneate a correlation based functional connectome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;once&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">nilearn.connectome</span>
+
+<span class="c1"># Estimating connectomes and save for pytorch to load</span>
+<span class="n">corr_measure</span> <span class="o">=</span> <span class="n">nilearn</span><span class="o">.</span><span class="n">connectome</span><span class="o">.</span><span class="n">ConnectivityMeasure</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;correlation&quot;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">corr_measure</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Correlation between </span><span class="si">%d</span><span class="s1"> regions&#39;</span> <span class="o">%</span> <span class="n">n_regions_extracted</span>
+
+<span class="c1"># First plot the matrix</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">plotting</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next step is to construct the brain graph for GCN.</p>
+<p><strong>k-Nearest Neighbours(KNN) graph</strong> for the group average connectome will be built based on the connectivity-matrix.</p>
+<p>Each node is only connected to <em>k</em> conn = corr_measure.fit_transform([X])[0]
+other neighbouring nodes.
+For the purpose of demostration, we constrain the graph to from clusters with <strong>8</strong> neighbouring nodes with the strongest connectivity.</p>
+<p>For more details you please check out <strong><em>src/graph_construction.py</em></strong> script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">graph_construction</span> <span class="kn">import</span> <span class="n">make_group_graph</span>
+
+<span class="c1"># make a graph for the subject</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">make_group_graph</span><span class="p">([</span><span class="n">conn</span><span class="p">],</span> <span class="n">self_loops</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-the-dataset-for-model-training">
+<h2>Preparing the dataset for model training<a class="headerlink" href="#preparing-the-dataset-for-model-training" title="Permalink to this headline">¶</a></h2>
+<p>The trials for different object categories are scattered in the experiment.
+Firstly we will concatenated the volumes of the same category together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate data</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># cancatenate the same type of trials</span>
+<span class="n">concat_bold</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+    <span class="n">cur_label_index</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">curr_bold_seg</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">cur_label_index</span><span class="p">]</span>    
+    <span class="n">concat_bold</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_bold_seg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We split the data by the time window size that we wish to use to caputre the temporal dynamic.
+Different lengths for our input data can be selected.
+In this example we will continue with <strong><em>window_length = 1</em></strong>, which means each input file will have a length equal to just one Repetition Time (TR).
+The splitted timeseries are saved as individual files (in the format of <code class="docutils literal notranslate"><span class="pre">&lt;category&gt;_seg_&lt;serialnumber&gt;.npy</span></code>),
+the file names and the associated label are stored in the same directory,
+under a file named <code class="docutils literal notranslate"><span class="pre">label.csv</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># split the data by time window size and save to file</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">dic_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categories</span><span class="p">)}</span>
+
+<span class="c1"># set output paths</span>
+<span class="n">split_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;haxby_split_win/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">split_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">split_path</span><span class="p">)</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_</span><span class="si">{:04d}</span><span class="s1">.npy&#39;</span><span class="p">)</span>
+<span class="n">out_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">split_path</span><span class="p">,</span> <span class="s1">&#39;labels.csv&#39;</span><span class="p">)</span>
+
+<span class="n">label_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">ts_data</span> <span class="ow">in</span> <span class="n">concat_bold</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ts_duration</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts_data</span><span class="p">)</span>
+    <span class="n">ts_filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">_seg&quot;</span>
+    <span class="n">valid_label</span> <span class="o">=</span> <span class="n">dic_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+
+    <span class="c1"># Split the timeseries</span>
+    <span class="n">rem</span> <span class="o">=</span> <span class="n">ts_duration</span> <span class="o">%</span> <span class="n">window_length</span>
+    <span class="n">n_splits</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">ts_duration</span> <span class="o">/</span> <span class="n">window_length</span><span class="p">))</span>
+
+    <span class="n">ts_data</span> <span class="o">=</span> <span class="n">ts_data</span><span class="p">[:(</span><span class="n">ts_duration</span> <span class="o">-</span> <span class="n">rem</span><span class="p">),</span> <span class="p">:]</span>   
+
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">split_ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ts_data</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">)):</span>
+        <span class="n">ts_output_file_name</span> <span class="o">=</span> <span class="n">out_file</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts_filename</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="n">split_ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">split_ts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">,</span> <span class="n">split_ts</span><span class="p">)</span>
+
+        <span class="n">curr_label</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">valid_label</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ts_output_file_name</span><span class="p">)}</span>
+        <span class="n">label_df</span> <span class="o">=</span> <span class="n">label_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_label</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+<span class="n">label_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we use a customised <code class="docutils literal notranslate"><span class="pre">pytorch</span></code> dataset generator class <code class="docutils literal notranslate"><span class="pre">TimeWindowsDataset</span></code> to split the data into training,
+validation, and testing sets for model selection.</p>
+<div class="tip admonition">
+<p class="admonition-title">Model selection</p>
+<p>For further details of model selection, please check out the material from <a class="reference external" href="https://github.com/neurodatascience/main-2021-ml-parts-1-2">this tutorial</a>.</p>
+</div>
+<p>The dataset generator defaults isolates 20% of the data as the validation set, and 10% as testing set.
+For more details of customising a dataset, please see <code class="docutils literal notranslate"><span class="pre">src/gcn_windows_dataset.py</span></code> and the
+official <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files"><code class="docutils literal notranslate"><span class="pre">pytorch</span></code> documentation</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># split dataset</span>
+<span class="kn">from</span> <span class="nn">gcn_windows_dataset</span> <span class="kn">import</span> <span class="n">TimeWindowsDataset</span>
+
+<span class="n">random_seed</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">valid_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">TimeWindowsDataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">split_path</span><span class="p">,</span> 
+    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> 
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span> 
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;train dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;valid dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test dataset: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the datasets are created, we can use the pytorch <a class="reference external" href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#preparing-your-data-for-training-with-dataloaders">data loader</a> to iterate through the data during the model selection process.
+The <strong>batch size</strong> defines the number of samples that will be propagated through the neural network.
+We are separating the dataset into 16 time windows per batch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+<span class="n">train_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">valid_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">valid_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train_features</span><span class="p">,</span> <span class="n">train_labels</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_generator</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature batch shape: </span><span class="si">{</span><span class="n">train_features</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_features</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels batch shape: </span><span class="si">{</span><span class="n">train_labels</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">; mean </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generating-a-gcn-model">
+<h2>Generating a GCN model<a class="headerlink" href="#generating-a-gcn-model" title="Permalink to this headline">¶</a></h2>
+<p>We have created a GCN of the following property:</p>
+<ul class="simple">
+<li><p><strong>3</strong> graph convolutional layers</p></li>
+<li><p><strong>32 graph filters</strong>  at each layer</p></li>
+<li><p>followed by a <strong>global average pooling</strong> layer</p></li>
+<li><p><strong>2 fully connected</strong> layers</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gcn_model</span> <span class="kn">import</span> <span class="n">GCN</span>
+
+<span class="n">gcn</span> <span class="o">=</span> <span class="n">GCN</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_index</span><span class="p">,</span> 
+          <span class="n">graph</span><span class="o">.</span><span class="n">edge_attr</span><span class="p">,</span> 
+          <span class="n">n_roi</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+          <span class="n">n_timepoints</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> 
+          <span class="n">n_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">))</span>
+<span class="n">gcn</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train-and-evaluating-the-model">
+<h2>Train and evaluating the model<a class="headerlink" href="#train-and-evaluating-the-model" title="Permalink to this headline">¶</a></h2>
+<p>We will use a procedure called backpropagation to train the model.
+When we training the model with the first batch of data, the accuarcy and loss will be pretty poor.
+Backpropagation is an algorithm to update the model based on the rate of loss.
+Iterating through each batch, the model will be updated and reduce the loss.</p>
+<p>Function <code class="docutils literal notranslate"><span class="pre">training_loop</span></code> performs backpropagation through pytorch.
+One can use their own choice of optimizer for backpropagation and estimator for loss.</p>
+<p>After one round of training, we use the validation dataset to calculate the average accuracy and loss with function <code class="docutils literal notranslate"><span class="pre">valid_test_loop</span></code>.
+These metrics will serve as the reference for model performance of this round of training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>    
+
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="c1"># Compute prediction and loss</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Backpropagation</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        
+        <span class="n">loss</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">batch</span> <span class="o">*</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">batch_size</span>
+
+        <span class="n">correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">correct</span> <span class="o">/=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">batch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">size</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">batch</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;0.3f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2">train_accuracy:</span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5.1f</span><span class="si">}</span><span class="s2">%</span><span class="se">\t\t</span><span class="s2">[</span><span class="si">{</span><span class="n">current</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s2">&gt;5d</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+        
+<span class="k">def</span> <span class="nf">valid_test_loop</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="n">correct</span> <span class="o">+=</span> <span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="n">loss</span> <span class="o">/=</span> <span class="n">size</span>
+    <span class="n">correct</span> <span class="o">/=</span> <span class="n">size</span>
+
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This whole procedure described above is called an <strong>epoch</strong>.
+We will repeat the process for 60 epochs.
+Here the choice of loss function is <code class="docutils literal notranslate"><span class="pre">CrossEntropyLoss</span></code> and the optimizer to update the model is <code class="docutils literal notranslate"><span class="pre">Adam</span></code>.</p>
+<div class="cell tag_hide_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">gcn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="se">\n</span><span class="s2">-------------------------------&quot;</span><span class="p">)</span>
+    <span class="n">train_loop</span><span class="p">(</span><span class="n">train_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">valid_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valid metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;8f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After training the model for 60 epochs, we use the untouched test data to evaluate the model and conclude the results of training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># results</span>
+<span class="n">loss</span><span class="p">,</span> <span class="n">correct</span> <span class="o">=</span> <span class="n">valid_test_loop</span><span class="p">(</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">gcn</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test metrics:</span><span class="se">\n\t</span><span class="s2"> avg_loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">&gt;f</span><span class="si">}</span><span class="s2">;</span><span class="se">\t</span><span class="s2"> avg_accuracy: </span><span class="si">{</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">correct</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;0.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The performance is not greate. How would you improve it?</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Try out different time window size, batch size for the dataset,</p></li>
+<li><p>Try different brain graph construction methods.</p></li>
+<li><p>Try use different loss function or optimizer function.</p></li>
+<li><p><strong>Hard</strong>: Treat the parameters you changed, such as time window size and batch size, as parameters of part of the model training.</p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id3"><dl class="citation">
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
+<dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">ZTTB21</a></span></dt>
+<dd><p>Yu Zhang, Loïc Tetrel, Bertrand Thirion, and Pierre Bellec. Functional annotation of human cognitive states using deep graph convolution. <em>NeuroImage</em>, 231:117847, May 2021.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="mlp_decoding.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Brain decoding with MLP</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="encoding.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Brain encoding</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
