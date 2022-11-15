@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brain decoding with GCN &#8212; Introduction to brain encoding and decoding in fMRI</title>
+    <title>Brain decoding with GCN &#8212; Introduction to brain decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -44,6 +44,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/design-tabs.js"></script>
@@ -88,7 +89,7 @@
       <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Introduction to brain encoding and decoding in fMRI</h1>
+      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -106,7 +107,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="haxby_data.html">
-   The Haxby dataset
+   An overview of the Haxby dataset
   </a>
  </li>
  <li class="toctree-l1">
@@ -393,7 +394,7 @@ The full time series are used to constrcut the brain graph to a network represen
 </div>
 <div class="section" id="getting-the-data">
 <h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id3">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">The Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
+<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series, and a dependent variable, the annotation on cognition.</p>
 <div class="cell tag_hide_input tag_hide_output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -426,7 +427,7 @@ The full time series are used to constrcut the brain graph to a network represen
 </div>
 </div>
 <p>The generation of brain time series is a little bit more complicated for the GCN framework.
-The GCN framework from Zhang and colleagues (2021) <span id="id2">[<a class="reference internal" href="#id6">ZTTB21</a>]</span> require a full brain graph.</p>
+The GCN framework from Zhang and colleagues (2021) <span id="id2">[<a class="reference internal" href="#id7">ZTTB21</a>]</span> require a full brain graph.</p>
 </div>
 <div class="section" id="extract-time-series-from-a-full-brain-atlas">
 <h2>Extract time series from a full brain atlas<a class="headerlink" href="#extract-time-series-from-a-full-brain-atlas" title="Permalink to this headline">¶</a></h2>
@@ -817,10 +818,10 @@ Here the choice of loss function is <code class="docutils literal notranslate"><
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p id="id3"><dl class="citation">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
 <dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
 </dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">ZTTB21</a></span></dt>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id2">ZTTB21</a></span></dt>
 <dd><p>Yu Zhang, Loïc Tetrel, Bertrand Thirion, and Pierre Bellec. Functional annotation of human cognitive states using deep graph convolution. <em>NeuroImage</em>, 231:117847, May 2021.</p>
 </dd>
 </dl>

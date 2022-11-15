@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Haxby dataset &#8212; Introduction to brain encoding and decoding in fMRI</title>
+    <title>An overview of the Haxby dataset &#8212; Introduction to brain decoding in fMRI</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -44,6 +44,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/design-tabs.js"></script>
@@ -88,7 +89,7 @@
       <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Introduction to brain encoding and decoding in fMRI</h1>
+      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -106,7 +107,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   The Haxby dataset
+   An overview of the Haxby dataset
   </a>
  </li>
  <li class="toctree-l1">
@@ -239,23 +240,43 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#downloading-the-data">
-   Downloading the data
+  <a class="reference internal nav-link" href="#a-short-primer-on-datasets">
+   A short primer on datasets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualizing-the-data">
-   Visualizing the data
+  <a class="reference internal nav-link" href="#downloading-exploring-the-haxby-dataset">
+   Downloading &amp; exploring the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Haxby
+    </span>
+    <span class="pre">
+     dataset
+    </span>
+   </code>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-fmri-data">
-   Preparing the fMRI data
+  <a class="reference internal nav-link" href="#the-data-in-more-depth">
+   The data in more depth
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neuroimaging-files">
+     Neuroimaging files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#labels-and-stimulus-annotations">
+     Labels and stimulus annotations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-cognitive-annotations">
-   Preparing the cognitive annotations
+  <a class="reference internal nav-link" href="#summary">
+   Summary
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -273,7 +294,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The Haxby dataset</h1>
+                <h1>An overview of the Haxby dataset</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -284,23 +305,43 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#downloading-the-data">
-   Downloading the data
+  <a class="reference internal nav-link" href="#a-short-primer-on-datasets">
+   A short primer on datasets
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#visualizing-the-data">
-   Visualizing the data
+  <a class="reference internal nav-link" href="#downloading-exploring-the-haxby-dataset">
+   Downloading &amp; exploring the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Haxby
+    </span>
+    <span class="pre">
+     dataset
+    </span>
+   </code>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-fmri-data">
-   Preparing the fMRI data
+  <a class="reference internal nav-link" href="#the-data-in-more-depth">
+   The data in more depth
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neuroimaging-files">
+     Neuroimaging files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#labels-and-stimulus-annotations">
+     Labels and stimulus annotations
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preparing-the-cognitive-annotations">
-   Preparing the cognitive annotations
+  <a class="reference internal nav-link" href="#summary">
+   Summary
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -317,135 +358,382 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="the-haxby-dataset">
-<span id="haxby-dataset"></span><h1>The Haxby dataset<a class="headerlink" href="#the-haxby-dataset" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="downloading-the-data">
-<h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this headline">¶</a></h2>
-<p>In the field of functional magnetic resonance imaging (fMRI), one of the first studies which have demonstrated the feasibility of brain decoding was the study by Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="#id3">HGF+01</a>]</span>. Subjects were presented with various images drawn from different categories. In this tutorial, we will try to decode the category of the image presented to the subject from brain data. We are first going to use nilearn to download one subject (number 4) from the Haxby dataset.</p>
-<div class="cell tag_remove-output docutils container">
+  <div class="tex2jax_ignore mathjax_ignore section" id="an-overview-of-the-haxby-dataset">
+<span id="haxby-dataset"></span><h1>An overview of the Haxby dataset<a class="headerlink" href="#an-overview-of-the-haxby-dataset" title="Permalink to this headline">¶</a></h1>
+<p>This part of the <code class="docutils literal notranslate"><span class="pre">tutorial</span></code> aims to make <code class="docutils literal notranslate"><span class="pre">participants</span></code> familiar with the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> we are going to use during this session and also address/introduce/recap some important aspects concerning <code class="docutils literal notranslate"><span class="pre">datasets</span></code> within <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code>/<code class="docutils literal notranslate"><span class="pre">decoding</span></code>. The objectives 📍 are:</p>
+<ul class="simple">
+<li><p>(re-)familiarize everyone with important <code class="docutils literal notranslate"><span class="pre">datasets</span></code> aspects</p></li>
+<li><p>exploring and understand the <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code></p></li>
+</ul>
+<div class="section" id="a-short-primer-on-datasets">
+<h2>A short primer on datasets<a class="headerlink" href="#a-short-primer-on-datasets" title="Permalink to this headline">¶</a></h2>
+<p>We wanted to avoid “just talking” about <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> in theory and also showcase how the respective <code class="docutils literal notranslate"><span class="pre">models</span></code> and workflows can be implemented, as well as run to give you some first hands-on experience. Even though we would have loved to get everyone to bring their data and directly apply the things we talk about, it’s unfortunately a bit too time-consuming for this setting. Thus, we decided to utilize an <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">dataset</span></code> that is ready to go and “small enough” to run <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">models</span></code> locally, ie on laptops. You might think “One of those tutorials again…it works with the example dataset but I have little or no chance on running it on/adapting it to my data.” and we would agree based on workshops we did ourselves.</p>
+<p>However, we tried our best to address this here by utilizing <code class="docutils literal notranslate"><span class="pre">software</span></code> whose <code class="docutils literal notranslate"><span class="pre">workflows</span></code> and <code class="docutils literal notranslate"><span class="pre">processing</span> <span class="pre">steps</span></code> are rather agnostic and implemented via <code class="docutils literal notranslate"><span class="pre">high-level</span> <span class="pre">API</span></code> that <em>should</em> allow a comparably straightforward application to different kinds of <code class="docutils literal notranslate"><span class="pre">data</span></code>. This specifically refers to a set of core aspects concerning the dataset’s structure and information entailed therein. How about a brief recap?</p>
+<div class="figure align-default" id="decoding-pipeline-example">
+<a class="reference internal image-reference" href="_images/decoding_pipeline_example.png"><img alt="_images/decoding_pipeline_example.png" src="_images/decoding_pipeline_example.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">A schematic representation of standard <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">workflow</span></code>/<code class="docutils literal notranslate"><span class="pre">pipeline</span></code>. The <code class="docutils literal notranslate"><span class="pre">input</span></code> (<code class="docutils literal notranslate"><span class="pre">data</span></code>) is prepared and potentially <code class="docutils literal notranslate"><span class="pre">preprocessed</span></code> before being submitted to a <code class="docutils literal notranslate"><span class="pre">model</span></code> that then utilizes a certain <code class="docutils literal notranslate"><span class="pre">metric</span></code> to provide a certain <code class="docutils literal notranslate"><span class="pre">output</span></code>.</span><a class="headerlink" href="#decoding-pipeline-example" title="Permalink to this image">¶</a></p>
+</div>
+<p>Here, we are going to focus on the <code class="docutils literal notranslate"><span class="pre">input</span></code> (<code class="docutils literal notranslate"><span class="pre">data</span></code>). As you heard before, it is usually expected to be structured as <code class="docutils literal notranslate"><span class="pre">samples</span></code> X <code class="docutils literal notranslate"><span class="pre">features</span></code>.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">What could samples X features refer to/entail?</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">sample</span></code> could be considered an <code class="docutils literal notranslate"><span class="pre">observation</span></code>/<code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">point</span></code>/one distinct entity in the <code class="docutils literal notranslate"><span class="pre">dataset</span></code>/one distinct part of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. For example, if you want to <code class="docutils literal notranslate"><span class="pre">predict</span></code> what a participant perceived based on their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activation</span></code>/<code class="docutils literal notranslate"><span class="pre">response</span></code>, the <code class="docutils literal notranslate"><span class="pre">samples</span></code> could entail the <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> <code class="docutils literal notranslate"><span class="pre">scans</span></code> or estimated <code class="docutils literal notranslate"><span class="pre">contrast</span> <span class="pre">images</span></code> of that <code class="docutils literal notranslate"><span class="pre">participant</span></code>. If you want to <code class="docutils literal notranslate"><span class="pre">predict</span></code> whether a <code class="docutils literal notranslate"><span class="pre">participant</span></code> exhibited a certain <code class="docutils literal notranslate"><span class="pre">behavior</span></code>, e.g. a captured by a <code class="docutils literal notranslate"><span class="pre">clinical</span> <span class="pre">measure</span></code>, etc., then the <code class="docutils literal notranslate"><span class="pre">samples</span></code> could comprise different <code class="docutils literal notranslate"><span class="pre">participants</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">feature</span></code> on the other hand would entail/describe certain aspects of a given <code class="docutils literal notranslate"><span class="pre">sample</span></code>. For example, if you want to <code class="docutils literal notranslate"><span class="pre">predict</span></code> what a participant perceived based on their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activation</span></code>/<code class="docutils literal notranslate"><span class="pre">response</span></code>, the <code class="docutils literal notranslate"><span class="pre">features</span></code> could entail the <code class="docutils literal notranslate"><span class="pre">voxel</span> <span class="pre">pattern</span></code> at a certain <code class="docutils literal notranslate"><span class="pre">ROI</span></code> at the given <code class="docutils literal notranslate"><span class="pre">sample</span></code>.</p>
+</div>
+<p>Thus, in order to make a given <code class="docutils literal notranslate"><span class="pre">dataset</span></code> “ready” for <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code>/<code class="docutils literal notranslate"><span class="pre">decoding</span></code>, we need to get it into the respective structure. Lucky for us, the tools we are going to explore, specifically <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>, incorporate this aspect and are make the corresponding process rather easy. What you need to run <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code>/<code class="docutils literal notranslate"><span class="pre">decoding</span></code> on your <code class="docutils literal notranslate"><span class="pre">dataset</span></code> is:</p>
+<ul class="simple">
+<li><p>know what your <code class="docutils literal notranslate"><span class="pre">samples</span></code> are (e.g. <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">series</span></code>, <code class="docutils literal notranslate"><span class="pre">statistical</span> <span class="pre">maps</span></code>, etc.)</p></li>
+<li><p>know what your <code class="docutils literal notranslate"><span class="pre">features</span></code> are (e.g. <code class="docutils literal notranslate"><span class="pre">voxel</span> <span class="pre">pattern</span></code> of an <code class="docutils literal notranslate"><span class="pre">ROI</span></code>, <code class="docutils literal notranslate"><span class="pre">annotations</span></code>, etc.)</p></li>
+<li><p>get the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> in the form <code class="docutils literal notranslate"><span class="pre">samples</span></code> X <code class="docutils literal notranslate"><span class="pre">features</span></code>, ie <code class="docutils literal notranslate"><span class="pre">samples</span></code> are <code class="docutils literal notranslate"><span class="pre">rows</span></code> and <code class="docutils literal notranslate"><span class="pre">features</span></code> are <code class="docutils literal notranslate"><span class="pre">columns</span></code></p></li>
+</ul>
+<p>While exploring the <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code> we will refer to this to make it more clear.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Bonus question: ever heard of the “small-n-high-p” (p &gt;&gt; n) problem?</p>
+<p>“Classical” <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code>/<code class="docutils literal notranslate"><span class="pre">decoding</span></code> models and the underlying algorithms operate on the assumption that are more <code class="docutils literal notranslate"><span class="pre">predictors</span></code> or <code class="docutils literal notranslate"><span class="pre">features</span></code> than there are <code class="docutils literal notranslate"><span class="pre">sample</span></code>. In fact many more. Why is that?
+Consider a high-dimensional <code class="docutils literal notranslate"><span class="pre">space</span></code> whose <code class="docutils literal notranslate"><span class="pre">dimensions</span></code> are defined by the number of <code class="docutils literal notranslate"><span class="pre">features</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">features</span></code> would result in a space with <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">dimensions</span></code>. The resulting <code class="docutils literal notranslate"><span class="pre">volume</span></code> of this <code class="docutils literal notranslate"><span class="pre">space</span></code> is the amount of <code class="docutils literal notranslate"><span class="pre">samples</span></code> that could be drawn from the <code class="docutils literal notranslate"><span class="pre">domain</span></code> and the number of <code class="docutils literal notranslate"><span class="pre">samples</span></code> entail the <code class="docutils literal notranslate"><span class="pre">samples</span></code> you need to address your <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">problem</span></code>, ie <code class="docutils literal notranslate"><span class="pre">decoding</span></code> outcome. That is why folks say: “get more data”, <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> is <code class="docutils literal notranslate"><span class="pre">data</span></code>-hungry: our <code class="docutils literal notranslate"><span class="pre">sample</span></code> needs to be as representative of the high-dimensional domain as possible. Thus, as the number of <code class="docutils literal notranslate"><span class="pre">features</span></code> increases, so should the number of <code class="docutils literal notranslate"><span class="pre">samples</span></code> so to capture enough of the <code class="docutils literal notranslate"><span class="pre">space</span></code> for the <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> at hand.</p>
+<p>This referred to as the <a class="reference external" href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a> and poses as a major problem in many fields that aim to utilize <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code>/<code class="docutils literal notranslate"><span class="pre">decoding</span></code> on unsuitable data. Why is that?
+Just imagine we have way more <code class="docutils literal notranslate"><span class="pre">features</span></code> than <code class="docutils literal notranslate"><span class="pre">samples</span></code>, ie <code class="docutils literal notranslate"><span class="pre">50</span> <span class="pre">features</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code> <code class="docutils literal notranslate"><span class="pre">samples</span></code>. Instead of having a large amount of <code class="docutils literal notranslate"><span class="pre">samples</span></code> within the <code class="docutils literal notranslate"><span class="pre">space</span></code>, allowing to achieve a sufficient coverage of the latter, we now have a very high-dimensional <code class="docutils literal notranslate"><span class="pre">space</span></code> (<code class="docutils literal notranslate"><span class="pre">50</span> <span class="pre">dimensions</span></code>) and only very few <code class="docutils literal notranslate"><span class="pre">samples</span></code> therein, basically not allowing us to capture nearly enough of the <code class="docutils literal notranslate"><span class="pre">space</span></code> as we would need to. This can result in expected outcomes, misleading results or even lead to complete <code class="docutils literal notranslate"><span class="pre">model</span></code> failure. Furthermore, respective <code class="docutils literal notranslate"><span class="pre">datasets</span></code> often lead to <code class="docutils literal notranslate"><span class="pre">models</span></code> that are <code class="docutils literal notranslate"><span class="pre">overfitted</span></code> and don’t <code class="docutils literal notranslate"><span class="pre">generalize</span></code> well.</p>
+<p>However, there are a few things that can be done to address this, including <code class="docutils literal notranslate"><span class="pre">feature</span> <span class="pre">selection</span></code>, <code class="docutils literal notranslate"><span class="pre">projection</span></code> into <code class="docutils literal notranslate"><span class="pre">lower-dimensional</span></code> <code class="docutils literal notranslate"><span class="pre">spaces</span></code> or <code class="docutils literal notranslate"><span class="pre">representations</span></code> or <code class="docutils literal notranslate"><span class="pre">regularization</span></code>.</p>
+<p>Question for everyone: what kind have <code class="docutils literal notranslate"><span class="pre">datasets</span></code> do we usually have in <code class="docutils literal notranslate"><span class="pre">neuroscience</span></code>, especially <code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code>?</p>
+</div>
+</div>
+<div class="section" id="downloading-exploring-the-haxby-dataset">
+<h2>Downloading &amp; exploring the <code class="docutils literal notranslate"><span class="pre">Haxby</span> <span class="pre">dataset</span></code><a class="headerlink" href="#downloading-exploring-the-haxby-dataset" title="Permalink to this headline">¶</a></h2>
+<p>In the field of <code class="docutils literal notranslate"><span class="pre">functional</span> <span class="pre">magnetic</span> <span class="pre">resonance</span> <span class="pre">imaging</span></code> (<code class="docutils literal notranslate"><span class="pre">fMRI</span></code>), one of the first studies which have demonstrated the feasibility of <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> was the study by Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="#id6">HGF+01</a>]</span>. <code class="docutils literal notranslate"><span class="pre">Subjects</span></code> were presented with various <code class="docutils literal notranslate"><span class="pre">images</span></code> drawn from different <code class="docutils literal notranslate"><span class="pre">categories</span></code> and subsequently a <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> used to <code class="docutils literal notranslate"><span class="pre">predict</span></code> the presented <code class="docutils literal notranslate"><span class="pre">categories</span></code> based on the <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>/<code class="docutils literal notranslate"><span class="pre">responses</span></code>. In the respective parts of this session, we will try to do the same!</p>
+<p>We are going to start with one <code class="docutils literal notranslate"><span class="pre">subject</span></code>, number <code class="docutils literal notranslate"><span class="pre">4</span></code>. To get the <code class="docutils literal notranslate"><span class="pre">data</span></code>, we can simply use <a class="reference external" href="https://nilearn.github.io/stable/modules/datasets.html">nilearn’s dataset module</a>. At first, we need to import the respective <code class="docutils literal notranslate"><span class="pre">module</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="c1"># We are fetching the data for subject 4</span>
-<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
-<span class="n">sub_no</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="n">sub_no</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
-<span class="n">func_file</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Next, we get the <code class="docutils literal notranslate"><span class="pre">data</span></code> and going to save it in a directory called <code class="docutils literal notranslate"><span class="pre">data</span></code>. Depending on your machine and internet connection, this might take a minute or so.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">haxby_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">fetch_haxby</span><span class="p">(</span><span class="n">subjects</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">fetch_stimuli</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="visualizing-the-data">
-<h2>Visualizing the data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline">¶</a></h2>
-<p>The data includes <code class="docutils literal notranslate"><span class="pre">nii</span></code> files, which contains images of brain volumes, either anatomical or functional. We can examine one functional volume using nilearn’s plotting tools. Because fmri data are 4D we use <a class="reference external" href="https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img">nilearn.image.mean_img</a> to extract the average brain volume.</p>
+</div>
+</div>
+<p>What do we have now? Lets have a look!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">haxby_dataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, we get a <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">dictionary</span></code> and there’s quite bit in it. This includes:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">anatomical</span> <span class="pre">data</span></code> under <code class="docutils literal notranslate"><span class="pre">anat</span></code></p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">functional</span> <span class="pre">data</span></code> under <code class="docutils literal notranslate"><span class="pre">func</span></code></p></li>
+<li><p>an annotation when <code class="docutils literal notranslate"><span class="pre">participants</span></code> perceived what <code class="docutils literal notranslate"><span class="pre">category</span></code></p></li>
+<li><p>several <code class="docutils literal notranslate"><span class="pre">masks</span></code> under <code class="docutils literal notranslate"><span class="pre">mask*</span></code></p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">dataset</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stimuli</span> <span class="pre">categories</span></code> and respective <code class="docutils literal notranslate"><span class="pre">stimuli</span></code></p></li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">Thinking about input data again…</p>
+<p>What would be our <code class="docutils literal notranslate"><span class="pre">samples</span></code> and <code class="docutils literal notranslate"><span class="pre">features</span></code>?</p>
+</div>
+</div>
+<div class="section" id="the-data-in-more-depth">
+<h2>The data in more depth<a class="headerlink" href="#the-data-in-more-depth" title="Permalink to this headline">¶</a></h2>
+<p>After getting a first idea of what our <code class="docutils literal notranslate"><span class="pre">dataset</span></code> entails, we should spend a bit more time exploring it in more depth, starting with the neuroimaging files.</p>
+<div class="section" id="neuroimaging-files">
+<h3>Neuroimaging files<a class="headerlink" href="#neuroimaging-files" title="Permalink to this headline">¶</a></h3>
+<p>As seen above, the data includes several <code class="docutils literal notranslate"><span class="pre">nii</span></code> files, which contain <code class="docutils literal notranslate"><span class="pre">images</span></code> of <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">volumes</span></code>, either <code class="docutils literal notranslate"><span class="pre">anatomical</span></code> or <code class="docutils literal notranslate"><span class="pre">functional</span></code> <code class="docutils literal notranslate"><span class="pre">scans</span></code>, as well as (<code class="docutils literal notranslate"><span class="pre">binary</span></code>) <code class="docutils literal notranslate"><span class="pre">masks</span></code>. Lets have a look at the <code class="docutils literal notranslate"><span class="pre">anatomical</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code> first.
+Using <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>, we can either <code class="docutils literal notranslate"><span class="pre">load</span></code> and then <code class="docutils literal notranslate"><span class="pre">plot</span></code> it or directly <code class="docutils literal notranslate"><span class="pre">plot</span></code> it. Here we are going to do the first option as it will allow us to check the properties of the <code class="docutils literal notranslate"><span class="pre">image</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">load_img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">anat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can access basically all parts of the <code class="docutils literal notranslate"><span class="pre">image</span></code>, including the <code class="docutils literal notranslate"><span class="pre">header</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">anat_image</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and actual <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span><span class="o">.</span><span class="n">dataobj</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">anat_image</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, this is basically a <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">array</span></code> that has the same <code class="docutils literal notranslate"><span class="pre">dimensions</span></code> as our <code class="docutils literal notranslate"><span class="pre">image</span></code> and the <code class="docutils literal notranslate"><span class="pre">data</span></code> reflect <code class="docutils literal notranslate"><span class="pre">values</span></code> for a given <code class="docutils literal notranslate"><span class="pre">voxel</span></code>. So far so good but how does it actually look? We can make use of one of <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>’s many <a class="reference external" href="https://nilearn.github.io/stable/modules/plotting.html">plotting functions</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">plotting</span>
-<span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">mean_img</span>
-<span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">mean_img</span><span class="p">(</span><span class="n">func_file</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that it is very hard to see the anatomy of the brain with that type of image. But it is not designed to capture brain anatomy, but rather changes of brain activity over time, through the coupling of neuronal activity with the oxygenation of blood vessels.</p>
-<div class="tip admonition">
-<p class="admonition-title">Interactive viewer</p>
-<p>The viewer <code class="docutils literal notranslate"><span class="pre">plotting.view_img</span></code> is interactive. You can click on the brain volume to explore different slices. You can learn about the three anatomical planes: sagittal (<code class="docutils literal notranslate"><span class="pre">x</span></code>), coronal (<code class="docutils literal notranslate"><span class="pre">y</span></code>) and axial (<code class="docutils literal notranslate"><span class="pre">z</span></code>) in the <a class="reference external" href="https://en.wikipedia.org/wiki/Anatomical_plane">wikipedia article</a>.</p>
-</div>
-</div>
-<div class="section" id="preparing-the-fmri-data">
-<h2>Preparing the fMRI data<a class="headerlink" href="#preparing-the-fmri-data" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="masker-fig">
-<a class="reference internal image-reference" href="_images/masker.png"><img alt="_images/masker.png" src="_images/masker.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">A <code class="docutils literal notranslate"><span class="pre">Masker</span></code> object is used to convert a 4D volume (space + time) into a data array, where each column is a voxel or brain region (features) and each row is a time point (samples). Figure from the <a class="reference external" href="https://nilearn.github.io/stable/manipulating_images/masker_objects.html">nilearn documentation</a>.</span><a class="headerlink" href="#masker-fig" title="Permalink to this image">¶</a></p>
-</div>
-<p>Instead of keeping the fMRI data as a 4D array (3D spatial coordinates + time), we are going to extract the time series associated with a mask of the ventral temporal cortex. This mask has been generated as part of the Haxby et al. (2001) study, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mask_filename</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">mask_vt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="c1"># Let&#39;s visualize it, using the subject&#39;s anatomical image as a</span>
-<span class="c1"># background</span>
-<span class="n">plotting</span><span class="o">.</span><span class="n">plot_roi</span><span class="p">(</span><span class="n">mask_filename</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">anat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_anat</span><span class="p">(</span><span class="n">anat_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can even create an <code class="docutils literal notranslate"><span class="pre">interactive</span> <span class="pre">plot</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">anat_image</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Comparably, we can do the same things with the <code class="docutils literal notranslate"><span class="pre">functional</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code>. That is <code class="docutils literal notranslate"><span class="pre">load</span></code>ing the <code class="docutils literal notranslate"><span class="pre">image</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and inspect its <code class="docutils literal notranslate"><span class="pre">header</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">func_image</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func_image</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">We already noticed something…</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> of the <code class="docutils literal notranslate"><span class="pre">anatomical</span></code> and <code class="docutils literal notranslate"><span class="pre">functional</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code> are quite different. Do you know why and which we would use for our planned <code class="docutils literal notranslate"><span class="pre">decoding</span></code> analyses?</p>
+</div>
+<p>As we have a <code class="docutils literal notranslate"><span class="pre">4D</span></code> <code class="docutils literal notranslate"><span class="pre">image</span></code>, that is <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">volumes</span></code> acquired over time (the <code class="docutils literal notranslate"><span class="pre">4th</span> <span class="pre">dimension</span></code>), we need to adapt the <code class="docutils literal notranslate"><span class="pre">plotting</span></code> a bit. More precisely, we need to either <code class="docutils literal notranslate"><span class="pre">plot</span></code> a <code class="docutils literal notranslate"><span class="pre">3D</span> <span class="pre">image</span></code> at a given <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">point</span></code> or e.g. compute the <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">image</span></code> over <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">plot</span></code> that. The latter might be more informative and additional shows you how easy this can be done using <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>’s <a class="reference external" href="https://nilearn.github.io/stable/modules/image.html">image functions</a>. Thus, we, at first, <code class="docutils literal notranslate"><span class="pre">import</span></code> the respective <code class="docutils literal notranslate"><span class="pre">function</span></code> and compute the <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">image</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.image</span> <span class="kn">import</span> <span class="n">mean_img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func_image_mean</span> <span class="o">=</span> <span class="n">mean_img</span><span class="p">(</span><span class="n">func_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check if this worked via the approach we followed above, ie checking the <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func_image_mean</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That seems about right and we can give the plot a try:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_epi</span><span class="p">(</span><span class="n">func_image_mean</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and of course, this also works for <code class="docutils literal notranslate"><span class="pre">interactive</span></code> plots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">view_img</span><span class="p">(</span><span class="n">func_image_mean</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="n">symmetric_cmap</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last type of <code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code> file we need to check are the (<code class="docutils literal notranslate"><span class="pre">binary</span></code>) <code class="docutils literal notranslate"><span class="pre">masks</span></code>, so let’s do it for one example <code class="docutils literal notranslate"><span class="pre">mask</span></code>: the <code class="docutils literal notranslate"><span class="pre">ventral</span> <span class="pre">temporal</span> <span class="pre">cortex</span></code>. This mask has been generated as part of the Haxby et al. (2001) study <span id="id2">[<a class="reference internal" href="#id6">HGF+01</a>]</span>, and highlights a part of the brain specialized in the processing of visual information, and which contains areas sensitive to different types of image categories <span id="id3">[<a class="reference internal" href="#id5">GSW14</a>]</span> . As with the types before, we can <code class="docutils literal notranslate"><span class="pre">load</span></code>,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">mask_vt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">inspect</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vt_mask</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vt_mask</span><span class="o">.</span><span class="n">dataobj</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">visualize</span></code> it (Here, we are going to plot it as an overlay on the <code class="docutils literal notranslate"><span class="pre">anatomical</span> <span class="pre">image</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_roi</span><span class="p">(</span><span class="n">vt_mask</span><span class="p">,</span> <span class="n">bg_img</span><span class="o">=</span><span class="n">anat_image</span><span class="p">,</span>
                   <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>We use one of the nilearn maskers to extract the fMRI time series associated just with this mask:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nilearn.input_data</span> <span class="kn">import</span> <span class="n">NiftiMasker</span>
-<span class="n">masker</span> <span class="o">=</span> <span class="n">NiftiMasker</span><span class="p">(</span><span class="n">mask_img</span><span class="o">=</span><span class="n">mask_filename</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">detrend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Selecting data</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">masker</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">func_file</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
+<p>With that, we had a quick look at all <code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code> <code class="docutils literal notranslate"><span class="pre">file</span></code> <code class="docutils literal notranslate"><span class="pre">types</span></code> present in the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> and can continue to have a look at the other <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">types</span></code> (and information therein) required to apply a <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code>.</p>
 </div>
-</div>
-</div>
-<p>We can see that the dataset has 1452 time samples (number of rows) and 675 voxels in the mask (number of columns).</p>
-<div class="tip admonition">
-<p class="admonition-title">Nilearn maskers</p>
-<p>Nilearn maskers are very versatile and offer many approaches to extract a time series array from 4D data, as well as reshape back an array into a series of brain volumes. You can learn more about nilearn maskers in this <a class="reference external" href="https://nilearn.github.io/stable/manipulating_images/masker_objects.html">documentation</a>.</p>
-</div>
-</div>
-<div class="section" id="preparing-the-cognitive-annotations">
-<h2>Preparing the cognitive annotations<a class="headerlink" href="#preparing-the-cognitive-annotations" title="Permalink to this headline">¶</a></h2>
-<p>Now, we are going to extract cognitive annotations, that is values which tell us what type of images the subject was viewing at each time point. Let’s look at the first 20 annotations:</p>
+<div class="section" id="labels-and-stimulus-annotations">
+<h3>Labels and stimulus annotations<a class="headerlink" href="#labels-and-stimulus-annotations" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned in prior sessions (e.g.<a class="reference external" href="https://main-educational.github.io/material.html#supervised-learning-using-scikit-learn">Supervised learning using scikit-learn</a> and hinted at the <a class="reference external" href="#A-short-primer-on-datasets">beginning of this session</a>, when working on a <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span> <span class="pre">problem</span></code>, we also need the <code class="docutils literal notranslate"><span class="pre">ground</span> <span class="pre">truth</span></code>/<code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">labels</span></code> for each <code class="docutils literal notranslate"><span class="pre">sample</span></code>. Why? Because we need to evaluate how a given <code class="docutils literal notranslate"><span class="pre">model</span></code> performs via comparing the <code class="docutils literal notranslate"><span class="pre">labels</span></code> it <code class="docutils literal notranslate"><span class="pre">predicted</span></code> to the <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">labels</span></code>. What these <code class="docutils literal notranslate"><span class="pre">labels</span></code> refer to can be manifold and of course depends on the <code class="docutils literal notranslate"><span class="pre">task</span></code> at hand.</p>
+<p>For example, a <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span> <span class="pre">problem</span></code> in the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> at hand could entail <code class="docutils literal notranslate"><span class="pre">training</span></code> a <code class="docutils literal notranslate"><span class="pre">model</span></code> to <code class="docutils literal notranslate"><span class="pre">recognize</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code> what <code class="docutils literal notranslate"><span class="pre">category</span></code> <code class="docutils literal notranslate"><span class="pre">participants</span></code> perceived based on their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activation</span></code>. Thus, we would need to know what <code class="docutils literal notranslate"><span class="pre">category</span></code> was shown when during the acquisition of the <code class="docutils literal notranslate"><span class="pre">data</span></code> (or which <code class="docutils literal notranslate"><span class="pre">category</span></code> resulted in which <code class="docutils literal notranslate"><span class="pre">estimated</span></code> <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span></code>).</p>
+<p>Within our <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code>, this information is included in the <code class="docutils literal notranslate"><span class="pre">session_target</span></code> file. Using <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/index.html">pandas</a> we can easily <code class="docutils literal notranslate"><span class="pre">load</span></code> and <code class="docutils literal notranslate"><span class="pre">inspect</span></code> this file:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">behavioral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">behavioral</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">stimulus_annotations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">haxby_dataset</span><span class="o">.</span><span class="n">session_target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>So let’s extract the labels for each time points. We can check that the number of annotations match exactly the number of samples we had in <code class="docutils literal notranslate"><span class="pre">X</span></code>. We can also check all the annotation categories available.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">behavioral</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stimulus_annotations</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>These annotations correspond to the category of the image subjects were watching at each time point. Samples of images for each category are shown below:</p>
-<div class="cell tag_hide-input docutils container">
+<p>While this is already informative, let’s plot it to get a better intuition.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">show</span>
-
-<span class="n">stimulus_information</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">stimuli</span>
-
-<span class="k">for</span> <span class="n">stim_type</span> <span class="ow">in</span> <span class="n">stimulus_information</span><span class="p">:</span>
-  <span class="c1"># skip control images, there are too many</span>
-  <span class="k">if</span> <span class="n">stim_type</span> <span class="o">!=</span> <span class="s1">&#39;controls&#39;</span><span class="p">:</span>
-
-     <span class="n">file_names</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="n">stim_type</span><span class="p">]</span>
-     <span class="n">file_names</span> <span class="o">=</span> <span class="n">file_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
-     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">stim_type</span><span class="p">)</span>
-
-     <span class="k">for</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_names</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
-         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
-
-     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
-         <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-
-<span class="n">show</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">],</span> 
+                     <span class="n">hue</span><span class="o">=</span><span class="n">stimulus_annotations</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Categories shown across time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time point/fMRI scan&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that for each image category, a number of scrambled images were also presented.</p>
-<div class="cell tag_hide-input docutils container">
+<p>As we can see, the information provided indicates what <code class="docutils literal notranslate"><span class="pre">category</span></code> <code class="docutils literal notranslate"><span class="pre">participants</span></code> perceived at which <code class="docutils literal notranslate"><span class="pre">sample</span></code> or <code class="docutils literal notranslate"><span class="pre">fMRI</span> <span class="pre">image</span> <span class="pre">acquisition</span></code> aka point in time during the experiment. With that, we have the needed <code class="docutils literal notranslate"><span class="pre">labels</span></code> for our <code class="docutils literal notranslate"><span class="pre">samples</span></code> (ie our <code class="docutils literal notranslate"><span class="pre">Y</span></code>) and can thus apply a <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span> <span class="pre">problem</span></code>.</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This already concludes this section of the session within which we explored the went through basic <code class="docutils literal notranslate"><span class="pre">datasets</span></code> concepts again and afterwards explored the <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code> which we are going to use during the remaining sections of this session, ie <span class="xref myst">Decoding via SVM</span>, <span class="xref myst">Decoding using MLPs</span> and <span class="xref myst">Decoding using GCNs</span>.</p>
+<p>Within this section you should have learned:</p>
+<ul class="simple">
+<li><p>important aspects of <code class="docutils literal notranslate"><span class="pre">datasets</span></code></p>
+<ul>
+<li><p>structured input in the form <code class="docutils literal notranslate"><span class="pre">samples</span> <span class="pre">X</span> <span class="pre">features</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">small</span> <span class="pre">n</span> <span class="pre">high</span> <span class="pre">p</span></code> problem</p></li>
+</ul>
+</li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code></p>
+<ul>
+<li><p>background</p></li>
+<li><p>file types and information therein</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">neuroimaging</span></code> files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stimulus</span> <span class="pre">annotations</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>If you have any questions, please don’t hesitate to ask us. Thank you very much for your attention and see you in the next section.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id4"><dl class="citation">
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id3">GSW14</a></span></dt>
+<dd><p>Kalanit Grill-Spector and Kevin S. Weiner. The functional architecture of the ventral temporal cortex and its role in categorization. <em>Nature Reviews Neuroscience</em>, 15(8):536–548, August 2014. URL: <a class="reference external" href="https://doi.org/10.1038/nrn3747">https://doi.org/10.1038/nrn3747</a>, <a class="reference external" href="https://doi.org/10.1038/nrn3747">doi:10.1038/nrn3747</a>.</p>
+</dd>
+<dt class="label" id="id6"><span class="brackets">HGF+01</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
+</dd>
+</dl>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
++++
+
+## Bonus: checking the stimuli
+
+As you saw above, our `tutorial dataset` actually also contains the `stimuli` utilized in the experiment. This pretty unique (because of e.g. copyright problems) but really cool. As we could use the `stimuli` for certain analyses, e.g. [encoding]() and/or comparing their processing in `biological` and `artificial neural networks`. However, this is unfortunately outside the scope of this session. Thus, we are just going to plot a few of them so you get an impression.
+
++++
+
+We can examine one functional volume using nilearn&#39;s plotting tools. Because fmri data are 4D we use [nilearn.image.mean_img](https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img) to extract the average brain volume.
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+
+from nilearn import datasets
+from nilearn.plotting import show
+
+stimulus_information = haxby_dataset.stimuli
+
+for stim_type in stimulus_information:
+  # skip control images, there are too many
+  if stim_type != &#39;controls&#39;:
+
+     file_names = stimulus_information[stim_type]
+     file_names = file_names[0:16]
+     fig, axes = plt.subplots(4, 4)
+     fig.suptitle(stim_type)
+
+     for img_path, ax in zip(file_names, axes.ravel()):
+         ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
+
+     for ax in axes.ravel():
+         ax.axis(&quot;off&quot;)
+
+show()
+</pre></div>
+</div>
+<p>Please note that for each <code class="docutils literal notranslate"><span class="pre">image</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>, a number of <code class="docutils literal notranslate"><span class="pre">scrambled</span> <span class="pre">images</span></code> were also presented.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">stim_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stimulus_information</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">])):</span>
     <span class="n">stim_type</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="s1">&#39;controls&#39;</span><span class="p">][</span><span class="n">stim_num</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -466,18 +754,6 @@
 </div>
 </div>
 </div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id2"><dl class="citation">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">HGF+01</a></span></dt>
-<dd><p>J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. <em>Science</em>, 293(5539):2425–2430, September 2001.</p>
-</dd>
-</dl>
-</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -489,16 +765,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "main_edu_2022"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: "main_edu_2022",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'main_edu_2022'</script>
 
               </div>
               
