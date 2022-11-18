@@ -284,6 +284,11 @@
    References
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-checking-the-stimuli">
+   Bonus: checking the stimuli
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -347,6 +352,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-checking-the-stimuli">
+   Bonus: checking the stimuli
   </a>
  </li>
 </ul>
@@ -695,42 +705,39 @@ Using <code class="docutils literal notranslate"><span class="pre">nilearn</span
 </dd>
 </dl>
 </p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-+++
+</div>
+<div class="section" id="bonus-checking-the-stimuli">
+<h2>Bonus: checking the stimuli<a class="headerlink" href="#bonus-checking-the-stimuli" title="Permalink to this headline">¶</a></h2>
+<p>As you saw above, our <code class="docutils literal notranslate"><span class="pre">tutorial</span> <span class="pre">dataset</span></code> actually also contains the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> utilized in the experiment. This pretty unique (because of e.g. copyright problems) but really cool. As we could use the <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> for certain analyses, e.g. <span class="xref myst">encoding</span> and/or comparing their processing in <code class="docutils literal notranslate"><span class="pre">biological</span></code> and <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>. However, this is unfortunately outside the scope of this session. Thus, we are just going to plot a few of them so you get an impression.</p>
+<p>We can examine one functional volume using nilearn’s plotting tools. Because fmri data are 4D we use <a class="reference external" href="https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img">nilearn.image.mean_img</a> to extract the average brain volume.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-## Bonus: checking the stimuli
+<span class="kn">from</span> <span class="nn">nilearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">show</span>
 
-As you saw above, our `tutorial dataset` actually also contains the `stimuli` utilized in the experiment. This pretty unique (because of e.g. copyright problems) but really cool. As we could use the `stimuli` for certain analyses, e.g. [encoding]() and/or comparing their processing in `biological` and `artificial neural networks`. However, this is unfortunately outside the scope of this session. Thus, we are just going to plot a few of them so you get an impression.
+<span class="n">stimulus_information</span> <span class="o">=</span> <span class="n">haxby_dataset</span><span class="o">.</span><span class="n">stimuli</span>
 
-+++
+<span class="k">for</span> <span class="n">stim_type</span> <span class="ow">in</span> <span class="n">stimulus_information</span><span class="p">:</span>
+  <span class="c1"># skip control images, there are too many</span>
+  <span class="k">if</span> <span class="n">stim_type</span> <span class="o">!=</span> <span class="s1">&#39;controls&#39;</span><span class="p">:</span>
 
-We can examine one functional volume using nilearn&#39;s plotting tools. Because fmri data are 4D we use [nilearn.image.mean_img](https://nilearn.github.io/modules/generated/nilearn.image.mean_img.html#nilearn.image.mean_img) to extract the average brain volume.
+     <span class="n">file_names</span> <span class="o">=</span> <span class="n">stimulus_information</span><span class="p">[</span><span class="n">stim_type</span><span class="p">]</span>
+     <span class="n">file_names</span> <span class="o">=</span> <span class="n">file_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+     <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">stim_type</span><span class="p">)</span>
 
-```{code-cell} ipython3
-import matplotlib.pyplot as plt
+     <span class="k">for</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_names</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
 
-from nilearn import datasets
-from nilearn.plotting import show
+     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
+         <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 
-stimulus_information = haxby_dataset.stimuli
-
-for stim_type in stimulus_information:
-  # skip control images, there are too many
-  if stim_type != &#39;controls&#39;:
-
-     file_names = stimulus_information[stim_type]
-     file_names = file_names[0:16]
-     fig, axes = plt.subplots(4, 4)
-     fig.suptitle(stim_type)
-
-     for img_path, ax in zip(file_names, axes.ravel()):
-         ax.imshow(plt.imread(img_path), cmap=plt.cm.gray)
-
-     for ax in axes.ravel():
-         ax.axis(&quot;off&quot;)
-
-show()
+<span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Please note that for each <code class="docutils literal notranslate"><span class="pre">image</span></code> <code class="docutils literal notranslate"><span class="pre">category</span></code>, a number of <code class="docutils literal notranslate"><span class="pre">scrambled</span> <span class="pre">images</span></code> were also presented.</p>
 <div class="cell docutils container">
