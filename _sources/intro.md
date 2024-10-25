@@ -3,18 +3,18 @@
 
 **"Introduction to brain decoding in fMRI"**
 
-This `jupyter book` presents an introduction to `brain decoding` using `fMRI`. It was developed within the [educational courses](https://main-educational.github.io), conducted as part of the [Montreal AI and Neuroscience (MAIN) conference](https://www.main2022.org/) in November 2022.
+This `jupyter book` presents an introduction to `brain decoding` using `fMRI`. It was developed within the [educational courses](https://main-educational.github.io), conducted as part of the [Montreal AI and Neuroscience (MAIN) conference](https://www.main2024.org/) in October 2024.
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://main-educational.github.io/brain_encoding_decoding/intro.html) 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/HEAD)
 [![Docker Hub](https://img.shields.io/docker/pulls/user/repo)]() 
-[![GitHub size](https://github-size-badge.herokuapp.com/main-educational/brain_encoding_decoding.svg)](https://github.com/main-educational/brain_encoding_decoding/archive/master.zip)
+[![GitHub size](https://img.shields.io/github/repo-size/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding/archive/master.zip)
 [![GitHub issues](https://img.shields.io/github/issues/main-educational/brain_encoding_decoding?style=plastic)](https://github.com/main-educational/brain_encoding_decoding)
 [![GitHub PR](https://img.shields.io/github/issues-pr/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding/pulls)
 [![License](https://img.shields.io/github/license/main-educational/brain_encoding_decoding)](https://github.com/main-educational/brain_encoding_decoding)
 [![CONP](https://img.shields.io/badge/Supported%20by-%20CONP%2FPCNO-red)](https://conp.ca/)
 
-Building upon the prior sections of the [educational courses](https://main-educational.github.io), the here presented resources aim to provide an overview of how `decoding` `models` can be applied to `fMRI` data in order to investigate `brain function`. Importantly, the respective methods cannot only be utilized to analyze data from `biological agents` (e.g. `humans`, `non-human primates`, etc.) but also `artificial neural networks`, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of `neuroscience` and `AI`.
+Building upon the prior sections of the [educational courses](https://main-educational.github.io), the here presented resources aim to provide an overview of how `decoding models` can be applied to `fMRI` data in order to investigate `brain function`. Importantly, the respective methods cannot only be utilized to analyze data from `biological agents` (e.g. `humans`, `non-human primates`, etc.) but also `artificial neural networks`, as well as presenting the opportunity to compare processing in both. They are thus core approaches that are prominently used at the intersection of `neuroscience` and `AI`.
  
  
 ```{figure} haxby_data/brain-encoding-decoding.png
@@ -46,12 +46,10 @@ name: brain_encoding_decoding_example_fig
 `Encoding` and `decoding` present contrary, yet complementary operations. While the former targets the prediction of `brain activity`/`responses` based on stimulus percepts/features (e.g. vision & audition), cognitive states or behavior, the latter aims to predict those aspects based on `brain activity`/`responses`. 
 ``` 
 
-For the tutorial on `encoding models`, please have a look at the respective session [here]().
-
-As noted above, this part of the educational course focuses on `decoding models`. More information and their application can be found in the respective sections of this resource. You can either use the `ToC` on the left or the links below to navigate accordingly.
+More information and their application can be found in the respective sections of this resource. You can either use the `ToC` on the left or the links below to navigate accordingly.
 
 
-::::{card-carousel} 4
+::::{card-carousel} 2
 
 :::{card}
 :margin: 3
@@ -60,7 +58,7 @@ As noted above, this part of the educational course focuses on `decoding models`
 :link: https://main-educational.github.io/brain_encoding_decoding/haxby_data.html
 **An overview of the Haxby Dataset**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/haxby_data_13_1.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/d3731383fc66953ff04a680a4d6671e6cfbaa19d6fda5f0089239e37c384ac71.png
 :height: 100
 ```
 
@@ -77,7 +75,7 @@ Explore this tutorial {fas}`arrow-right`
 
 **Brain decoding with SVM**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/svm_decoding_13_0.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/2021c085709559df545bf08eb2ee051f9098c2f5619e666dceeb879ff1801dfb.png
 :height: 100
 ```
 
@@ -85,6 +83,9 @@ Utilizing an SVM classifier to predict percepts from fMRI data.
 +++
 Explore this tutorial {fas}`arrow-right`
 :::
+::::
+
+::::{card-carousel} 2
 
 :::{card}
 :margin: 3
@@ -100,7 +101,7 @@ Explore this tutorial {fas}`arrow-right`
 
 Brain decoding using a basic artificial neural network.
 +++
-Explore this book {fas}`arrow-right`
+Explore this tutorial {fas}`arrow-right`
 :::
 
 :::{card}
@@ -111,7 +112,7 @@ Explore this book {fas}`arrow-right`
 
 **Brain decoding with GCN**
 ^^^
-```{image} https://main-educational.github.io/brain_encoding_decoding/_images/gcn_decoding_9_0.png
+```{image} https://main-educational.github.io/brain_encoding_decoding/_images/GCN_pipeline_main2022.png
 :height: 100
 ```
 
@@ -120,7 +121,6 @@ Graph convolutional networks for brain decoding.
 Explore this tutorial {fas}`arrow-right`
 :::
 ::::
-
 
 
 ## Setup
@@ -136,7 +136,7 @@ For the `local installation` to work, you need two things: the fitting `python e
 :::{admonition} Install python
 :class: tip
 :name: python-install-tip
-You need to have access to a terminal with Python 3.
+You need to have access to a `terminal` with `Python 3`.
 If you have setup your environment based on instructions of [MAIN educational installation guide](https://main-educational.github.io/installation.html), you are good to go 🎉
 
 If it not already the case,
@@ -156,21 +156,21 @@ After making sure you have a working `python installation`, you need to get the 
 2. We encourage you to use a `virtual environment` for this tutorial
     (and for all your projects, that's a good practice).
     To do this, run the following commands in your terminal, it will create the
-    `environment` in a folder named `env_tuto`:
+    `environment` in a folder named `main_edu_brain_decoding`:
 
     ```bash
-    python3 -m venv env_tuto
+    python3 -m venv main_edu_brain_decoding
     ```
     Then the following `command` will `activate` the `environment`:
 
     ```bash
-    source env_tuto/bin/activate
+    source main_edu_brain_decoding/bin/activate
     ```
 
     Finally, you can install the required `libraries`:
 
     ```bash
-    pip install -r binder/requirements.txt
+    pip install -r requirements.txt
     ```
 
 3. Navigate to the `content` of the `jupyter book`:
@@ -185,6 +185,12 @@ After making sure you have a working `python installation`, you need to get the 
     ```
     Click on the `.md` files. They will be rendered as jupyter notebooks 🎉
 
+Alternatively, you can use [conda/miniconda](https://docs.conda.io/projects/conda/en/latest/index.html) to create the needed `python environment` like so:
+    
+    git clone https://github.com/main-educational/brain_encoding_decoding.git
+    cd brain_encoding_decoding
+    conda env create -f environment.yml
+    
 
 ```
 
@@ -205,42 +211,48 @@ For the full experience, we recommend using the local set up instruction.
 
 This tutorial was prepared and presented by
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor I</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor II</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor III</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor IV</b></sub>
-      </a>
-    </td>  
-    <td align="center">
-      <a href="">
-        <img src="" width="100px;" alt=""/>
-        <br /><sub><b>Instructor V</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
+::::{card-carousel} 2
 
+:::{card} Pierre-Louis Barbarant
+:margin: 3
+:class-body: text-center
+:link: https://github.com/pbarbarant
+:img-top: https://avatars.githubusercontent.com/u/104081777?v=4
+:::
 
+:::{card} Peer Herholz
+:margin: 3
+:class-body: text-center
+:link: https://github.com/PeerHerholz
+:img-top: https://avatars.githubusercontent.com/u/20129524?v=4?s=100
+:::
+
+::::
+
+It is based on earlier versions created by:
+
+::::{card-carousel} 3
+:::{card} Isil Bilgin
+:margin: 3
+:class-body: text-center
+:link: https://github.com/complexbrains
+:img-top: https://avatars.githubusercontent.com/u/45263281?v=4
+:::
+
+:::{card} Alexandre Pasquiou
+:margin: 3
+:class-body: text-center
+:link: https://twitter.com/a_pasquiou
+:img-top: https://pbs.twimg.com/profile_images/1542505896386764800/pyC2rgHp_400x400.jpg
+:::
+
+:::{card} Pravish Sainath
+:margin: 3
+:class-body: text-center
+:link: https://github.com/pravishsainath
+:img-top: https://avatars.githubusercontent.com/u/13696562?v=4
+:::
+::::
 
 ## Thanks and acknowledgements 
 Parts of the tutorial are directly adapted from a [nilearn tutorial](https://nilearn.github.io/auto_examples/plot_decoding_tutorial.html) on the so-called [Haxby dataset]().

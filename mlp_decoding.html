@@ -1,333 +1,532 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brain decoding with MLP &#8212; Introduction to brain decoding in fMRI</title>
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    <title>Brain decoding with MLP &#8212; Introduction to brain decodin in fMRI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-      
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="_static/design-tabs.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mlp_decoding';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="canonical" href="https://main-educational.github.io/brain_encoding_decoding/mlp_decoding.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Brain decoding with GCN" href="gcn_decoding.html" />
     <link rel="prev" title="Brain decoding with SVM" href="svm_decoding.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/neurolibre-logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Introduction to brain decoding in fMRI</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Welcome
-  </a>
- </li>
+    
+    
+    <img src="_static/neurolibre-logo.png" class="logo__image only-light" alt="Introduction to brain decodin in fMRI - Home"/>
+    <script>document.write(`<img src="_static/neurolibre-logo.png" class="logo__image only-dark" alt="Introduction to brain decodin in fMRI - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="haxby_data.html">An overview of the Haxby dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm_decoding.html">Brain decoding with SVM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brain decoding with MLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcn_decoding.html">Brain decoding with GCN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">Brain encoding</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="haxby_data.html">
-   An overview of the Haxby dataset
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="svm_decoding.html">
-   Brain decoding with SVM
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Brain decoding with MLP
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gcn_decoding.html">
-   Brain decoding with GCN
-  </a>
- </li>
-</ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="_sources/mlp_decoding.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/mlp_decoding.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/main-educational/brain_encoding_decoding"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fmlp_decoding.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/mlp_decoding.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/mlp_decoding.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/main-educational/brain_encoding_decoding/main?urlpath=tree/content/mlp_decoding.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/edit/main/content/mlp_decoding.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/main-educational/brain_encoding_decoding/issues/new?title=Issue%20on%20page%20%2Fmlp_decoding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/mlp_decoding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/mlp_decoding.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Brain decoding with MLP</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multilayer-perceptron">
-   Multilayer Perceptron
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-the-data">
-   Getting the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-model">
-   Training a model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assessing-performance">
-   Assessing performance
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-motivation">Theoretical motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model">Training a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-performance">Assessing performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Brain decoding with MLP</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multilayer-perceptron">
-   Multilayer Perceptron
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#getting-the-data">
-   Getting the data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-model">
-   Training a model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assessing-performance">
-   Assessing performance
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="brain-decoding-with-mlp">
-<h1>Brain decoding with MLP<a class="headerlink" href="#brain-decoding-with-mlp" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="multilayer-perceptron">
-<h2>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-default" id="multilayer-perceptron-fig">
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="brain-decoding-with-mlp">
+<h1>Brain decoding with MLP<a class="headerlink" href="#brain-decoding-with-mlp" title="Link to this heading">#</a></h1>
+<p>This part of the <code class="docutils literal notranslate"><span class="pre">session</span></code> aims to make <code class="docutils literal notranslate"><span class="pre">participants</span></code> familiar with <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer Peceptrons</a> as one possible <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> that can be applied to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code>. The objectives 📍 are:</p>
+<ul class="simple">
+<li><p>get to know the basics of <code class="docutils literal notranslate"><span class="pre">Multilayer</span> <span class="pre">Peceptrons</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> creation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> <code class="docutils literal notranslate"><span class="pre">training</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> <code class="docutils literal notranslate"><span class="pre">testing</span></code></p></li>
+</ul>
+</li>
+</ul>
+<section id="multilayer-perceptron">
+<h2>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Link to this heading">#</a></h2>
+<figure class="align-default" id="multilayer-perceptron-fig">
 <a class="reference internal image-reference" href="_images/multilayer-perceptron.png"><img alt="_images/multilayer-perceptron.png" src="_images/multilayer-perceptron.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">A multilayer perceptron with 25 units on the input layer, a single hidden layer with 17 units, and an output layer with 9 units. Figure generated with the <a class="reference external" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a> tool by [Alexander Lenail]. The figure is shared under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#multilayer-perceptron-fig" title="Permalink to this image">¶</a></p>
-</div>
-<p>We are going to train a Multilayer Perceptron (MLP) classifier for brain decoding on the Haxby dataset. MLPs are one of the most basic architecture of artificial neural networks. MLPs consist of input and output layers as well as hidden layers that transform the input to the usable data for the output layer. Like other machine learning models for supervised learning, a MLP initially goes through a training phase. During this supervised phase, the network is taught what to look for and what is the desired output.
-In this tutorial, we are going to train the simplest MLP architecture featuring one input layer, one output layer and just one hidden layer.</p>
-</div>
-<div class="section" id="getting-the-data">
-<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Permalink to this headline">¶</a></h2>
-<p>We are going to download the dataset from Haxby and colleagues (2001) <span id="id1">[<a class="reference internal" href="haxby_data.html#id6">HGF+01</a>]</span>. You can check section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that dataset. Here we are going to quickly download it, and prepare it for machine learning applications with a set of predictive variable, the brain time series <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a dependent variable, the annotation on cognition <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
-<div class="cell tag_hide_input docutils container">
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">A multilayer perceptron with 25 units on the input layer, a single hidden layer with 17 units, and an output layer with 9 units. Figure generated with the <a class="reference external" href="http://alexlenail.me/NN-SVG/index.html">NN-SVG</a> tool by [Alexander Lenail]. The figure is shared under a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> license.</span><a class="headerlink" href="#multilayer-perceptron-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We are going to train a <code class="docutils literal notranslate"><span class="pre">Multilayer</span> <span class="pre">Perceptron</span></code> (<code class="docutils literal notranslate"><span class="pre">MLP</span></code>) <code class="docutils literal notranslate"><span class="pre">classifier</span></code> for <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">decoding</span></code> on the <a class="reference external" href="https://main-educational.github.io/brain_encoding_decoding/haxby_data.html">Haxby dataset</a>. <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s are one of the most basic architecture of <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a>. As such, <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s consist of <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> <code class="docutils literal notranslate"><span class="pre">layers</span></code> as well as <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layers</span></code> that process the <code class="docutils literal notranslate"><span class="pre">input</span></code> through a succession of <code class="docutils literal notranslate"><span class="pre">transformations</span></code> towards the <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> that performs the task at hand, e.g. a <code class="docutils literal notranslate"><span class="pre">classification</span></code> or <code class="docutils literal notranslate"><span class="pre">regression</span></code>. Like other <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span> <span class="pre">models</span></code> for <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">learning</span></code>, an <code class="docutils literal notranslate"><span class="pre">MLP</span></code> initially goes through a <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">phase</span></code>. During this <code class="docutils literal notranslate"><span class="pre">supervised</span> <span class="pre">phase</span></code>, the <code class="docutils literal notranslate"><span class="pre">network</span></code> is taught what to look for and what is the desired output via its <code class="docutils literal notranslate"><span class="pre">objective</span> <span class="pre">function</span></code>. This refers to, minimizing the <code class="docutils literal notranslate"><span class="pre">loss</span></code>, ie the deviation of <code class="docutils literal notranslate"><span class="pre">predictions</span></code> from the “ground truth”, and thus increasing its performance.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MLP</span></code>s were actually among the first <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s to appear, specifically the <a class="reference external" href="https://en.wikipedia.org/wiki/Perceptron">Mark I Peceptron</a> which you can see below.</p>
+<figure class="align-default" id="marki-perceptron-fig">
+<a class="reference internal image-reference" href="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01"><img alt="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01" src="https://preview.redd.it/wgzps0pvcny91.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=0b2e56dc4eaa886ebd01ac0cd8e51fc4efdb1d01" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Frank Rosenblatt with a Mark I Perceptron computer in 1960.</span><a class="headerlink" href="#marki-perceptron-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In this tutorial, we are going to train the simplest <code class="docutils literal notranslate"><span class="pre">MLP</span></code> architecture featuring one <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>, one <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> and just one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
+</section>
+<section id="theoretical-motivation">
+<h2>Theoretical motivation<a class="headerlink" href="#theoretical-motivation" title="Link to this heading">#</a></h2>
+<p>The previous tutorial on <a class="reference external" href="https://main-educational.github.io/brain_encoding_decoding/svm_decoding.html">brain decoding with SVM</a>
+shows how to use a linear combination of brain features to train a predictor.</p>
+<p>Let’s take a moment to consider this: a 1-layer perceptron with a sigmoid activation function
+models the relation between <code class="docutils literal notranslate"><span class="pre">X</span></code> (the input data) and <code class="docutils literal notranslate"><span class="pre">y</span></code> (the predicted data)
+the same way a logistic regression would:
+<span class="math notranslate nohighlight">\(\hat{y} = \sigma(X \beta + \beta_0)\)</span></p>
+<figure class="align-default" id="logistic-regression-fig">
+<a class="reference internal image-reference" href="_images/logistic_regression.png"><img alt="_images/logistic_regression.png" src="_images/logistic_regression.png" style="width: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">A fitted logistic regression function classifying two different classes. Courtesy of <a class="reference external" href="https://jeromedockes.github.io/">Jérôme Dockès</a>.</span><a class="headerlink" href="#logistic-regression-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If one optimizes the parameters of this MLP to minimize a cross-entropy loss,
+they’re actually optimizing for the same objective function as in a classical logistic regression problem:
+<span class="math notranslate nohighlight">\(\underset{\beta, \beta_0}{\min} \sum_k y_k \log(\hat{y_k}) + (1 - y_k) \log(1 - \hat{y_k})\)</span></p>
+<p>As a rule of thumb, one can consider that a 1-layer perceptron
+(and therefore any last layer of a multi-layer perceptron)
+works similarly to an SVC.</p>
+<p>A big motivation for using multiple-layer perceptrons is that they can introduce non-linearities
+in our data. When training such models, the hope is that the hidden layers of the model
+will find meaningful non-linear combinations of the input features which help us solve
+our decoding problem.</p>
+</section>
+<section id="getting-the-data">
+<h2>Getting the data<a class="headerlink" href="#getting-the-data" title="Link to this heading">#</a></h2>
+<p>We are going to work with the Haxby dataset <span id="id1">[<a class="reference internal" href="haxby_data.html#id6" title="J V Haxby, M I Gobbini, M L Furey, A Ishai, J L Schouten, and P Pietrini. Distributed and overlapping representations of faces and objects in ventral temporal cortex. Science, 293(5539):2425–2430, September 2001.">HGF+01</a>]</span> again. You can check the section <a class="reference internal" href="haxby_data.html#haxby-dataset"><span class="std std-ref">An overview of the Haxby dataset</span></a> for more details on that <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Here we are going to quickly <code class="docutils literal notranslate"><span class="pre">download</span></code> and prepare it for <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span> <span class="pre">applications</span></code> with a set of <code class="docutils literal notranslate"><span class="pre">predictive</span> <span class="pre">variables</span></code>, the <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">time</span> <span class="pre">series</span></code> <code class="docutils literal notranslate"><span class="pre">X</span></code>, and a <code class="docutils literal notranslate"><span class="pre">dependent</span> <span class="pre">variable</span></code>, the respective <code class="docutils literal notranslate"><span class="pre">cognitive</span> <span class="pre">processes</span></code>/<code class="docutils literal notranslate"><span class="pre">function</span></code>/<code class="docutils literal notranslate"><span class="pre">percepts</span></code> <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -354,21 +553,19 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/multiclass.py:14: DeprecationWarning: Please use `spmatrix` from the `scipy.sparse` namespace, the `scipy.sparse.base` namespace is deprecated.
-  from scipy.sparse.base import spmatrix
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe2` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/sklearn/utils/optimize.py:18: DeprecationWarning: Please use `line_search_wolfe1` from the `scipy.optimize` namespace, the `scipy.optimize.linesearch` namespace is deprecated.
-  from scipy.optimize.linesearch import line_search_wolfe2, line_search_wolfe1
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/func.py:20: DeprecationWarning: Please use `MatReadError` from the `scipy.io.matlab` namespace, the `scipy.io.matlab.miobase` namespace is deprecated.
-  from scipy.io.matlab.miobase import MatReadError
-/opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
-  warn(&quot;Fetchers from the nilearn.datasets module will be &quot;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nilearn/input_data/__init__.py:23: DeprecationWarning: The import path &#39;nilearn.input_data&#39; is deprecated in version 0.9. Importing from &#39;nilearn.input_data&#39; will be possible at least until release 0.13.0. Please import from &#39;nilearn.maskers&#39; instead.
+  warnings.warn(message, DeprecationWarning)
+/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/nilearn/image/resampling.py:492: UserWarning: The provided image has no sform in its header. Please check the provided file. Results may not be as expected.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/joblib/memory.py:312: DeprecationWarning: The default strategy for standardize is currently &#39;zscore&#39; which incorrectly uses population std to calculate sample zscores. The new strategy &#39;zscore_sample&#39; corrects this behavior by using the sample std. In release 0.13, the default strategy will be replaced by the new strategy and the &#39;zscore&#39; option will be removed. Please use &#39;zscore_sample&#39; instead.
+  return self.func(*args, **kwargs)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s check the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<p>As an initial check, we’ll have a look at the size of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
@@ -387,8 +584,8 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </div>
 </div>
 </div>
-<p>So we have 1452 time points, with one cognitive annotations each, and for each time point we have recordings of fMRI activity across 675 voxels. We can also see that the cognitive annotations span 9 different categories.</p>
-<p>We are going to use Keras for training the MLP, and we are going to convert the string categories into a one-hot encoder:</p>
+<p>So we have <code class="docutils literal notranslate"><span class="pre">1452</span></code> <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">points</span></code>, with one <code class="docutils literal notranslate"><span class="pre">label</span></code> for the respective <code class="docutils literal notranslate"><span class="pre">stimulus</span> <span class="pre">percept</span></code> each, and for each <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">point</span></code> we have <code class="docutils literal notranslate"><span class="pre">recordings</span></code> of <code class="docutils literal notranslate"><span class="pre">brain</span></code> activity obtained via  <code class="docutils literal notranslate"><span class="pre">fMRI</span></code> across <code class="docutils literal notranslate"><span class="pre">675</span> <span class="pre">voxels</span></code> (within the <code class="docutils literal notranslate"><span class="pre">VT</span></code> <code class="docutils literal notranslate"><span class="pre">mask</span></code>). We can also see that the <code class="docutils literal notranslate"><span class="pre">stimulus</span> <span class="pre">percept</span></code>s span <code class="docutils literal notranslate"><span class="pre">9</span></code> different <code class="docutils literal notranslate"><span class="pre">categories</span></code>.</p>
+<p>However, concerning our planned analyses, we need to convert our <code class="docutils literal notranslate"><span class="pre">categories</span></code> into a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">one-hot encoder</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating instance of one-hot-encoder</span>
@@ -398,7 +595,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 <span class="n">y_onehot</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="c1"># turn the sparse matrix into a pandas dataframe</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_onehot</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
-<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -494,19 +691,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
       <td>0.0</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1447</th>
+      <th>5</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -518,62 +703,61 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1448</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>6</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1449</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>7</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1450</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>8</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1451</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>9</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
     </tr>
   </tbody>
 </table>
-<p>1452 rows × 9 columns</p>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="training-a-model">
-<h2>Training a model<a class="headerlink" href="#training-a-model" title="Permalink to this headline">¶</a></h2>
-<p>We are going to start by splitting our dataset between train and test. We will keep 20% of the time points as test, and then set up a 10 fold cross validation for training/validation.</p>
+</section>
+<section id="training-a-model">
+<h2>Training a model<a class="headerlink" href="#training-a-model" title="Link to this heading">#</a></h2>
+<p>As introduced in the prior <code class="docutils literal notranslate"><span class="pre">tutorials</span></code>, one of the most important aspects of <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> is the split between <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">tests</span></code>. <code class="docutils literal notranslate"><span class="pre">MLP</span></code>s are no exception to that and thus we need to split our dataset accordingly. We will keep <code class="docutils literal notranslate"><span class="pre">20%</span></code> of the <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">points</span></code> as <code class="docutils literal notranslate"><span class="pre">test</span></code>, and then set up a <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">fold</span> <span class="pre">cross</span> <span class="pre">validation</span></code> for <code class="docutils literal notranslate"><span class="pre">training/validation</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -582,219 +766,534 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </div>
 </div>
 </div>
-<p>Now we can build a MLP using Tensorflow and Keras:</p>
+<p>With that, we can already build our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Here, we are going to use <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> and <a class="reference external" href="https://keras.io/">Keras</a>. As with every other <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we need to <code class="docutils literal notranslate"><span class="pre">import</span></code> the respective components, here, the <code class="docutils literal notranslate"><span class="pre">model</span></code> and <code class="docutils literal notranslate"><span class="pre">layer</span></code> <code class="docutils literal notranslate"><span class="pre">type</span></code>. In our case we will use a <a class="reference external" href="https://keras.io/guides/sequential_model/"><code class="docutils literal notranslate"><span class="pre">Sequential</span></code> <code class="docutils literal notranslate"><span class="pre">model</span></code></a> and <a class="reference external" href="https://keras.io/api/layers/core_layers/dense/"><code class="docutils literal notranslate"><span class="pre">Dense</span></code></a> <code class="docutils literal notranslate"><span class="pre">layers</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
-
-<span class="c1"># number of unique conditions that we have</span>
-<span class="n">model_mlp</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
-
-<span class="c1"># Adding the input layer and the first hidden layer</span>
-<span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span> <span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">675</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-
-<span class="c1"># Adding the second hidden layer</span>
-<span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
-
-<span class="c1"># Using softmax at the end, length of categories shows the number of labels we have</span>
-<span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
-
-<span class="n">model_mlp</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># number of unique conditions that we have</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">21</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="sd">&quot;&quot;&quot;Implementation of the Keras API, the high-level API of TensorFlow.</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="sd"> Detailed documentation and user guides are available at</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="sd"> [keras.io](https://keras.io).</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># pylint: disable=unused-import</span>
-<span class="ne">---&gt; </span><span class="mi">21</span> <span class="kn">from</span> <span class="nn">tensorflow.python</span> <span class="kn">import</span> <span class="n">tf2</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">distribute</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1"># See b/110718070#comment18 for more details about this import.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">41</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="kn">import</span> <span class="nn">six</span> <span class="k">as</span> <span class="nn">_six</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
-<span class="ne">---&gt; </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python.tools</span> <span class="kn">import</span> <span class="n">module_util</span> <span class="k">as</span> <span class="n">_module_util</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="kn">from</span> <span class="nn">tensorflow.python.util.lazy_loader</span> <span class="kn">import</span> <span class="n">LazyLoader</span> <span class="k">as</span> <span class="n">_LazyLoader</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="c1"># Make sure code inside the TensorFlow codebase can use tf2.enabled() at import.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">40</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">import</span> <span class="nn">traceback</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="c1"># We aim to keep this file minimal and ideally remove completely.</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="c1"># If you are adding a new file with @tf_export decorators,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="c1"># import it in modules_with_exports.py instead.</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> 
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="c1"># go/tf-wildcard-import</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="c1"># pylint: disable=wildcard-import,g-bad-import-order,g-import-not-at-top</span>
-<span class="ne">---&gt; </span><span class="mi">40</span> <span class="kn">from</span> <span class="nn">tensorflow.python.eager</span> <span class="kn">import</span> <span class="n">context</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="kn">from</span> <span class="nn">tensorflow.python</span> <span class="kn">import</span> <span class="n">pywrap_tensorflow</span> <span class="k">as</span> <span class="n">_pywrap_tensorflow</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># pylint: enable=wildcard-import</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> 
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># Bring in subpackages.</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">eager</span><span class="o">/</span><span class="n">context</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">32</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="kn">import</span> <span class="nn">six</span>
-<span class="ne">---&gt; </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">function_pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">tensorflow.core.protobuf</span> <span class="kn">import</span> <span class="n">config_pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="kn">from</span> <span class="nn">tensorflow.core.protobuf</span> <span class="kn">import</span> <span class="n">rewriter_config_pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">function_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">attr_value_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_attr__value__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">node_def_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_node__def__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">op_def_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_op__def__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">attr_value_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">tensor_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">resource_handle_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_resource__handle__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">resource_handle_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># @@protoc_insertion_point(imports)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">tensor_shape_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">tensorflow.core.framework</span> <span class="kn">import</span> <span class="n">types_pb2</span> <span class="k">as</span> <span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">DESCRIPTOR</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">FileDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;tensorflow/core/framework/resource_handle.proto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>   <span class="n">package</span><span class="o">=</span><span class="s1">&#39;tensorflow&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>   <span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>   <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="n">tensorflow_dot_core_dot_framework_dot_tensor__shape__pb2</span><span class="o">.</span><span class="n">DESCRIPTOR</span><span class="p">,</span><span class="n">tensorflow_dot_core_dot_framework_dot_types__pb2</span><span class="o">.</span><span class="n">DESCRIPTOR</span><span class="p">,])</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">tensor_shape_pb2</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">DESCRIPTOR</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">FileDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;tensorflow/core/framework/tensor_shape.proto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>   <span class="n">package</span><span class="o">=</span><span class="s1">&#39;tensorflow&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>   <span class="n">serialized_pb</span><span class="o">=</span><span class="n">_b</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">,tensorflow/core/framework/tensor_shape.proto</span><span class="se">\x12\n</span><span class="s1">tensorflow</span><span class="se">\&quot;</span><span class="s1">z</span><span class="se">\n\x10</span><span class="s1">TensorShapeProto</span><span class="se">\x12</span><span class="s1">-</span><span class="se">\n\x03\x64</span><span class="s1">im</span><span class="se">\x18\x02</span><span class="s1"> </span><span class="se">\x03</span><span class="s1">(</span><span class="se">\x0b\x32</span><span class="s1"> .tensorflow.TensorShapeProto.Dim</span><span class="se">\x12\x14\n\x0c</span><span class="s1">unknown_rank</span><span class="se">\x18\x03</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\x08\x1a</span><span class="s1">!</span><span class="se">\n\x03\x44</span><span class="s1">im</span><span class="se">\x12\x0c\n\x04</span><span class="s1">size</span><span class="se">\x18\x01</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\x03\x12\x0c\n\x04</span><span class="s1">name</span><span class="se">\x18\x02</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\t</span><span class="s1">B</span><span class="se">\x87\x01\n\x18</span><span class="s1">org.tensorflow.frameworkB</span><span class="se">\x11</span><span class="s1">TensorShapeProtosP</span><span class="se">\x01</span><span class="s1">ZSgithub.com/tensorflow/tensorflow/tensorflow/go/core/framework/tensor_shape_go_proto</span><span class="se">\xf8\x01\x01\x62\x06</span><span class="s1">proto3&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">_TENSORSHAPEPROTO_DIM</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">Descriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Dim&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>   <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>   <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>   <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>   <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>   <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
-<span class="ne">---&gt; </span><span class="mi">36</span>     <span class="n">_descriptor</span><span class="o">.</span><span class="n">FieldDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim.size&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span>       <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cpp_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>       <span class="n">has_default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>       <span class="n">message_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>       <span class="n">is_extension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">extension_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>       <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">_descriptor</span><span class="o">.</span><span class="n">FieldDescriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto.Dim.name&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>       <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">cpp_type</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span>       <span class="n">has_default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="n">_b</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>       <span class="n">message_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">enum_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">containing_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span>       <span class="n">is_extension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">extension_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span>       <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">DESCRIPTOR</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>   <span class="n">extensions</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span>   <span class="n">nested_types</span><span class="o">=</span><span class="p">[],</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>   <span class="n">enum_types</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span>   <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>   <span class="n">is_extendable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>   <span class="n">syntax</span><span class="o">=</span><span class="s1">&#39;proto3&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>   <span class="n">extension_ranges</span><span class="o">=</span><span class="p">[],</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span>   <span class="n">oneofs</span><span class="o">=</span><span class="p">[</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>   <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>   <span class="n">serialized_start</span><span class="o">=</span><span class="mi">149</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span>   <span class="n">serialized_end</span><span class="o">=</span><span class="mi">182</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="n">_TENSORSHAPEPROTO</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">Descriptor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TensorShapeProto&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>   <span class="n">full_name</span><span class="o">=</span><span class="s1">&#39;tensorflow.TensorShapeProto&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span>   <span class="n">serialized_end</span><span class="o">=</span><span class="mi">182</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">101</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">_TENSORSHAPEPROTO_DIM</span><span class="o">.</span><span class="n">containing_type</span> <span class="o">=</span> <span class="n">_TENSORSHAPEPROTO</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.14/x64/lib/python3.8/site-packages/google/protobuf/descriptor.py:560,</span> in <span class="ni">FieldDescriptor.__new__</span><span class="nt">(cls, name, full_name, index, number, type, cpp_type, label, default_value, message_type, enum_type, containing_type, is_extension, extension_scope, options, serialized_options, has_default_value, containing_oneof, json_name, file, create_key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span> <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">cpp_type</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">555</span>             <span class="n">default_value</span><span class="p">,</span> <span class="n">message_type</span><span class="p">,</span> <span class="n">enum_type</span><span class="p">,</span> <span class="n">containing_type</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">556</span>             <span class="n">is_extension</span><span class="p">,</span> <span class="n">extension_scope</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">557</span>             <span class="n">serialized_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">558</span>             <span class="n">has_default_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">containing_oneof</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">json_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span>             <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">create_key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
-<span class="ne">--&gt; </span><span class="mi">560</span>   <span class="n">_message</span><span class="o">.</span><span class="n">Message</span><span class="o">.</span><span class="n">_CheckCalledFromGeneratedFile</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span>   <span class="k">if</span> <span class="n">is_extension</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">562</span>     <span class="k">return</span> <span class="n">_message</span><span class="o">.</span><span class="n">default_pool</span><span class="o">.</span><span class="n">FindExtensionByName</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: Descriptors cannot not be created directly.
-<span class="n">If</span> <span class="n">this</span> <span class="n">call</span> <span class="n">came</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">_pb2</span><span class="o">.</span><span class="n">py</span> <span class="n">file</span><span class="p">,</span> <span class="n">your</span> <span class="n">generated</span> <span class="n">code</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="n">date</span> <span class="ow">and</span> <span class="n">must</span> <span class="n">be</span> <span class="n">regenerated</span> <span class="k">with</span> <span class="n">protoc</span> <span class="o">&gt;=</span> <span class="mf">3.19.0</span><span class="o">.</span>
-<span class="n">If</span> <span class="n">you</span> <span class="n">cannot</span> <span class="n">immediately</span> <span class="n">regenerate</span> <span class="n">your</span> <span class="n">protos</span><span class="p">,</span> <span class="n">some</span> <span class="n">other</span> <span class="n">possible</span> <span class="n">workarounds</span> <span class="n">are</span><span class="p">:</span>
-<span class="g g-Whitespace"> </span><span class="mi">1</span><span class="o">.</span> <span class="n">Downgrade</span> <span class="n">the</span> <span class="n">protobuf</span> <span class="n">package</span> <span class="n">to</span> <span class="mf">3.20</span><span class="o">.</span><span class="n">x</span> <span class="ow">or</span> <span class="n">lower</span><span class="o">.</span>
-<span class="g g-Whitespace"> </span><span class="mi">2</span><span class="o">.</span> <span class="n">Set</span> <span class="n">PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION</span><span class="o">=</span><span class="n">python</span> <span class="p">(</span><span class="n">but</span> <span class="n">this</span> <span class="n">will</span> <span class="n">use</span> <span class="n">pure</span><span class="o">-</span><span class="n">Python</span> <span class="n">parsing</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">much</span> <span class="n">slower</span><span class="p">)</span><span class="o">.</span>
-
-<span class="n">More</span> <span class="n">information</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">developers</span><span class="o">.</span><span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">protocol</span><span class="o">-</span><span class="n">buffers</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">news</span><span class="o">/</span><span class="mi">2022</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">06</span><span class="c1">#python-updates</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 17:29:37.304521: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-25 17:29:37.322088: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-25 17:29:37.322117: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-25 17:29:37.334452: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 17:29:38.332944: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
 </pre></div>
 </div>
 </div>
 </div>
-<p>Time to train that model!</p>
-<div class="cell tag_hide-output docutils container">
+<div class="tip admonition">
+<p class="admonition-title">A note regarding our MLP</p>
+<p>Please note that the example <code class="docutils literal notranslate"><span class="pre">MLP</span></code> we are going to <code class="docutils literal notranslate"><span class="pre">create</span></code> and <code class="docutils literal notranslate"><span class="pre">train</span></code> here is rather simple as we want to enable its application on machines with rather limited computational resources (ie your laptops or binder). “Real-world” models are usually more complex and might also entail different <code class="docutils literal notranslate"><span class="pre">types</span></code> and <code class="docutils literal notranslate"><span class="pre">layers</span></code>.</p>
+</div>
+<p>Initially, we need to create our, so far, <code class="docutils literal notranslate"><span class="pre">empty</span> <span class="pre">model</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compiling the model</span>
-<span class="n">model_mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
-<span class="c1"># Fitting the model on the Training set</span>
-<span class="n">history</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of unique conditions that we have</span>
+<span class="n">model_mlp</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we can add the <code class="docutils literal notranslate"><span class="pre">layers</span></code> to our <code class="docutils literal notranslate"><span class="pre">model</span></code>, starting with the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code>. Given this is a rather short introduction to the topic and does not focus on <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s, we are going to set the <code class="docutils literal notranslate"><span class="pre">kernel</span> <span class="pre">initialization</span></code> and <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> to appropriate defaults (Please have a look at the <a class="reference external" href="https://main-educational.github.io/material.html#introduction-to-deep-learning-using-pytorch">Introduction to deep learning session</a> for more information.).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">50</span> <span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">675</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/keras/src/layers/core/dense.py:87: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As noted above, we are using <code class="docutils literal notranslate"><span class="pre">Dense</span></code> <code class="docutils literal notranslate"><span class="pre">layers</span></code> and as you can see, we set the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">dimensions</span></code> to <code class="docutils literal notranslate"><span class="pre">675</span></code>. You might have already notices that this is the number of <code class="docutils literal notranslate"><span class="pre">voxels</span></code> we have <code class="docutils literal notranslate"><span class="pre">data</span></code> from. Setting the <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">dimension</span></code> according to the <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">dimensions</span></code> is rather important is referred to as the <a class="reference external" href="https://en.wikipedia.org/wiki/Semantic_gap">semantic gap</a>: the transformation of <code class="docutils literal notranslate"><span class="pre">actions</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">percepts</span></code> conducted/perceived by <code class="docutils literal notranslate"><span class="pre">human</span></code>s into <code class="docutils literal notranslate"><span class="pre">computational</span> <span class="pre">representations</span></code>. For example, pictures are “nothing” but a huge <code class="docutils literal notranslate"><span class="pre">array</span></code> for a computer and what will be submitted to the input layer of an <code class="docutils literal notranslate"><span class="pre">ANN</span></code> (note: this also holds true for basically any other type of <code class="docutils literal notranslate"><span class="pre">data</span></code>). Here, our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> receives the extracted <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">patterns</span></code> as <code class="docutils literal notranslate"><span class="pre">input</span></code> which are already in the right <code class="docutils literal notranslate"><span class="pre">array</span></code> format thanks to <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>. Thus, always carefully think about what your <code class="docutils literal notranslate"><span class="pre">input</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code> entails and how it is structured to then setup your <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">layer</span></code> accordingly.</p>
+<p>Next, we are going to add one <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And because we are creating a very simple <code class="docutils literal notranslate"><span class="pre">MLP</span></code> with only three <code class="docutils literal notranslate"><span class="pre">layers</span></code>, we already add our <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code>, using the <code class="docutils literal notranslate"><span class="pre">softmax</span></code> <code class="docutils literal notranslate"><span class="pre">activation</span> <span class="pre">function</span></code> given that we aim to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> to <code class="docutils literal notranslate"><span class="pre">predict</span></code> the different <code class="docutils literal notranslate"><span class="pre">categories</span></code> that were perceived by the <code class="docutils literal notranslate"><span class="pre">participants</span></code> from their <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">activity</span> <span class="pre">patterns</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get a nice overview of our <code class="docutils literal notranslate"><span class="pre">ANN</span></code>, we can now use the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> <code class="docutils literal notranslate"><span class="pre">function</span></code>, which will provide us with the <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">parameters</span></code> and for each <code class="docutils literal notranslate"><span class="pre">layer</span></code>, the its <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">parameters</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential"</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ dense (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                   │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">50</span>)             │        <span style="color: #00af00; text-decoration-color: #00af00">33,800</span> │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">30</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">1,530</span> │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">9</span>)              │           <span style="color: #00af00; text-decoration-color: #00af00">279</span> │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">35,609</span> (139.10 KB)
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">35,609</span> (139.10 KB)
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
+</pre>
+</div></div>
+</div>
+<p>With that, we already created our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> <code class="docutils literal notranslate"><span class="pre">architecture</span></code>, which is now ready to be <code class="docutils literal notranslate"><span class="pre">compiled</span></code>! Within this step, we will set the <code class="docutils literal notranslate"><span class="pre">optimizer</span></code>, <code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">function</span></code> and <code class="docutils literal notranslate"><span class="pre">metric</span></code>, ie <code class="docutils literal notranslate"><span class="pre">components</span></code> that define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> will <code class="docutils literal notranslate"><span class="pre">learn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now it’s to <code class="docutils literal notranslate"><span class="pre">train</span></code> our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>. Thus, we have to <code class="docutils literal notranslate"><span class="pre">fit</span></code> it to our <code class="docutils literal notranslate"><span class="pre">data</span></code>, specifically only the <code class="docutils literal notranslate"><span class="pre">training</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code>. Here, we are going to provide a few more <code class="docutils literal notranslate"><span class="pre">hyperparameters</span></code> that will define how our <code class="docutils literal notranslate"><span class="pre">MLP</span></code> is going to <code class="docutils literal notranslate"><span class="pre">learn</span></code>. This entails the <code class="docutils literal notranslate"><span class="pre">batch</span> <span class="pre">size</span></code>, the <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and <code class="docutils literal notranslate"><span class="pre">split</span></code> of <code class="docutils literal notranslate"><span class="pre">validation</span> <span class="pre">sets</span></code>. We will assign the respective output to a variable so that we can investigate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
                              <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+</pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">visualization</span>
-<span class="n">plot_history</span> <span class="o">=</span> <span class="n">visualization</span><span class="o">.</span><span class="n">classifier_history</span> <span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s1">&#39;MLP &#39;</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1:03</span> 694ms/step - accuracy: 0.0000e+00 - loss: 2.1911
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 3ms/step - accuracy: 0.0000e+00 - loss: 2.1908    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">59/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 914us/step - accuracy: 0.3019 - loss: 1.9671  
+<span class=" -Color -Color-Bold">60/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 934us/step - accuracy: 0.3038 - loss: 1.9634  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 2ms/step - accuracy: 0.3520 - loss: 1.8524 - val_accuracy: 0.4893 - val_loss: 1.4419
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 2/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 15ms/step - accuracy: 0.9000 - loss: 0.9916
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 907us/step - accuracy: 0.7750 - loss: 1.0668
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.7167 - loss: 1.0510
+<span class=" -Color -Color-Bold"> 6/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.6372 - loss: 1.1609 
+<span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.6580 - loss: 1.1407  
+<span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.6875 - loss: 1.1609  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 7/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.6237 - loss: 1.1609
+<span class=" -Color -Color-Bold"> 8/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.6114 - loss: 1.1869
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">67/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 868us/step - accuracy: 0.5832 - loss: 1.2090
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">68/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 868us/step - accuracy: 0.5833 - loss: 1.2090
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.5875 - loss: 1.1895 - val_accuracy: 0.6309 - val_loss: 1.1306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 3/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 793us/step - accuracy: 0.7500 - loss: 0.9498
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - accuracy: 0.7939 - loss: 0.8716
+<span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 0.7000 - loss: 0.8817
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 6/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.7904 - loss: 0.8647 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 846us/step - accuracy: 0.7875 - loss: 0.8797
+<span class=" -Color -Color-Bold"> 7/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.7885 - loss: 0.8522 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 973us/step - accuracy: 0.7860 - loss: 0.8522
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 8/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.7884 - loss: 0.8255  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">71/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 857us/step - accuracy: 0.7849 - loss: 0.7867
+<span class=" -Color -Color-Bold">72/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 856us/step - accuracy: 0.7848 - loss: 0.7864
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">76/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 874us/step - accuracy: 0.7843 - loss: 0.7855
+<span class=" -Color -Color-Bold">74/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 865us/step - accuracy: 0.7846 - loss: 0.7853
+<span class=" -Color -Color-Bold">75/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 866us/step - accuracy: 0.7845 - loss: 0.7851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">77/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 880us/step - accuracy: 0.7842 - loss: 0.7851
+<span class=" -Color -Color-Bold">78/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 897us/step - accuracy: 0.7840 - loss: 0.7844
+<span class=" -Color -Color-Bold">73/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 863us/step - accuracy: 0.7847 - loss: 0.7858
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.7812 - loss: 0.7814 - val_accuracy: 0.6996 - val_loss: 0.8991
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 799us/step - accuracy: 0.8500 - loss: 0.5502
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 941us/step - accuracy: 0.8333 - loss: 0.5873
+<span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 0.9000 - loss: 0.5873 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">67/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 794us/step - accuracy: 0.8718 - loss: 0.5019
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">68/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 795us/step - accuracy: 0.8714 - loss: 0.5019
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.8639 - loss: 0.5034 - val_accuracy: 0.6996 - val_loss: 0.8127
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9854 - loss: 0.2230
+<span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9889 - loss: 0.2230
+<span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - accuracy: 1.0000 - loss: 0.2130
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9843 - loss: 0.2379
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 6/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9786 - loss: 0.2479
+<span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 1.0000 - loss: 0.1720
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">54/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9338 - loss: 0.3081
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">55/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9337 - loss: 0.3083
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">57/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9336 - loss: 0.3086
+<span class=" -Color -Color-Bold">58/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9335 - loss: 0.3086
+<span class=" -Color -Color-Bold">56/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9336 - loss: 0.3086
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9287 - loss: 0.3122 - val_accuracy: 0.7682 - val_loss: 0.7282
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 6/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 15ms/step - accuracy: 0.9000 - loss: 0.2448
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9333 - loss: 0.2223 
+<span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9387 - loss: 0.2223 
+<span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9278 - loss: 0.2401 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 921us/step - accuracy: 0.9250 - loss: 0.2360
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">66/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 808us/step - accuracy: 0.9701 - loss: 0.1832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">67/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 806us/step - accuracy: 0.9701 - loss: 0.1832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">65/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 806us/step - accuracy: 0.9702 - loss: 0.1832
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">68/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 833us/step - accuracy: 0.9700 - loss: 0.1831
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9692 - loss: 0.1822 - val_accuracy: 0.7682 - val_loss: 0.6931
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 7/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 1.0000 - loss: 0.0591
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">70/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 744us/step - accuracy: 0.9899 - loss: 0.1009
+<span class=" -Color -Color-Bold">71/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 756us/step - accuracy: 0.9899 - loss: 0.1010
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">69/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 743us/step - accuracy: 0.9900 - loss: 0.1009
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">72/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 762us/step - accuracy: 0.9899 - loss: 0.1011
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">73/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 774us/step - accuracy: 0.9898 - loss: 0.1012
+<span class=" -Color -Color-Bold">74/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 780us/step - accuracy: 0.9898 - loss: 0.1012
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9896 - loss: 0.1019 - val_accuracy: 0.7983 - val_loss: 0.6597
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 8/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 842us/step - accuracy: 1.0000 - loss: 0.1245
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 940us/step - accuracy: 0.9875 - loss: 0.1024
+<span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 1.0000 - loss: 0.1245
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9871 - loss: 0.0981 
+<span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - accuracy: 0.9900 - loss: 0.1008 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">71/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 811us/step - accuracy: 0.9948 - loss: 0.0722
+<span class=" -Color -Color-Bold">70/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 810us/step - accuracy: 0.9948 - loss: 0.0723
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">73/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 823us/step - accuracy: 0.9948 - loss: 0.0721
+<span class=" -Color -Color-Bold">72/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 817us/step - accuracy: 0.9948 - loss: 0.0721
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">75/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 833us/step - accuracy: 0.9948 - loss: 0.0717
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">74/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 826us/step - accuracy: 0.9948 - loss: 0.0716
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9951 - loss: 0.0702 - val_accuracy: 0.7725 - val_loss: 0.7480
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 9/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 1.0000 - loss: 0.0606
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 878us/step - accuracy: 0.9750 - loss: 0.0630
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9722 - loss: 0.0630 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">67/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 791us/step - accuracy: 0.9943 - loss: 0.0416
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">70/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 816us/step - accuracy: 0.9944 - loss: 0.0417
+<span class=" -Color -Color-Bold">69/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 810us/step - accuracy: 0.9943 - loss: 0.0417
+<span class=" -Color -Color-Bold">68/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 792us/step - accuracy: 0.9943 - loss: 0.0416
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">71/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 798us/step - accuracy: 0.9944 - loss: 0.0417
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9949 - loss: 0.0420 - val_accuracy: 0.7983 - val_loss: 0.7147
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 10/10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 3/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 818us/step - accuracy: 1.0000 - loss: 0.0347
+<span class=" -Color -Color-Bold"> 4/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.0322
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 741us/step - accuracy: 1.0000 - loss: 0.0322
+<span class=" -Color -Color-Bold"> 5/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 944us/step - accuracy: 1.0000 - loss: 0.0322
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/93</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 14ms/step - accuracy: 1.0000 - loss: 0.0322 
+<span class=" -Color -Color-Bold"> 7/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.0293  
+<span class=" -Color -Color-Bold"> 6/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.0270  
+<span class=" -Color -Color-Bold"> 8/93</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.0263  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">70/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 831us/step - accuracy: 0.9980 - loss: 0.0279
+<span class=" -Color -Color-Bold">69/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 831us/step - accuracy: 0.9979 - loss: 0.0279
+<span class=" -Color -Color-Bold">73/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 857us/step - accuracy: 0.9980 - loss: 0.0278
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">71/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 856us/step - accuracy: 0.9980 - loss: 0.0279
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">72/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 837us/step - accuracy: 0.9980 - loss: 0.0278
+<span class=" -Color -Color-Bold">75/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 858us/step - accuracy: 0.9980 - loss: 0.0277
+<span class=" -Color -Color-Bold">74/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 875us/step - accuracy: 0.9980 - loss: 0.0278
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">93/93</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - accuracy: 0.9982 - loss: 0.0273 - val_accuracy: 0.8026 - val_loss: 0.7071
 </pre></div>
 </div>
 </div>
 </div>
+<p>This looks about and what we would expect the <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code> to be: across <code class="docutils literal notranslate"><span class="pre">epochs</span></code>, the <code class="docutils literal notranslate"><span class="pre">loss</span></code> is decreasing and the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> is increasing.</p>
+<div class="tip admonition">
+<p class="admonition-title">A note regarding the learning process of our MLP</p>
+<p>Comparable to its architecture, our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code> is also not really what you would see on the “real world”. Usually, <code class="docutils literal notranslate"><span class="pre">ANN</span></code>s are <code class="docutils literal notranslate"><span class="pre">trained</span></code> way more, for longer periods of times, more <code class="docutils literal notranslate"><span class="pre">epochs</span></code> and on more <code class="docutils literal notranslate"><span class="pre">data</span></code>. However, we keep it rather short as we want to enable its application on machines with rather limited computational resources (ie your laptops or binder).</p>
 </div>
-<div class="section" id="assessing-performance">
-<h2>Assessing performance<a class="headerlink" href="#assessing-performance" title="Permalink to this headline">¶</a></h2>
-<p>Let’s check the accuracy of the prediction on the training set:</p>
+<p>While this is already informative, we can also plot the <code class="docutils literal notranslate"><span class="pre">loss</span></code> and <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> in the <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">validation</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code> respectively. Let’s start with the <code class="docutils literal notranslate"><span class="pre">loss</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making the predictions and evaluating the model</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/babe2be108ce8491c4bf5a553c6c386bcb1de8a850857eb338a00634ea6af583.png" src="_images/babe2be108ce8491c4bf5a553c6c386bcb1de8a850857eb338a00634ea6af583.png" />
+</div>
+</div>
+<p>And now the same for the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;epoch&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5c8374a3fe3e432e45d72e95ed1f1cde42a638abf27fbe42270cd8f070dc1664.png" src="_images/5c8374a3fe3e432e45d72e95ed1f1cde42a638abf27fbe42270cd8f070dc1664.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">How would you interpret these plots…</p>
+<p>concerning our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>? Does it make sense? If not, how should it look like? Could you use these plots to evaluate certain aspects of the <code class="docutils literal notranslate"><span class="pre">learning</span> <span class="pre">process</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">regularization</span></code>?</p>
+</div>
+</section>
+<section id="assessing-performance">
+<h2>Assessing performance<a class="headerlink" href="#assessing-performance" title="Link to this heading">#</a></h2>
+<p>After evaluating the <code class="docutils literal notranslate"><span class="pre">training</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>, we of course also need to evaluate its (<code class="docutils literal notranslate"><span class="pre">predictive</span></code>) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. Here, this refers to the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s outcomes, ie its <code class="docutils literal notranslate"><span class="pre">predictions</span></code>. We already saw this in the above plots and during the <code class="docutils literal notranslate"><span class="pre">training</span></code> across <code class="docutils literal notranslate"><span class="pre">epochs</span></code> but let’s check the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> of the <code class="docutils literal notranslate"><span class="pre">prediction</span></code> on the <code class="docutils literal notranslate"><span class="pre">training</span> <span class="pre">set</span></code> again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_train_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/37</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 38ms/step
+</pre></div>
 </div>
-<p>This is dangerously high. Let’s check on the test set:</p>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 2/37</span> <span class=" -Color -Color-Green">━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">37/37</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       0.88      0.96      0.92        85
+           1       0.94      0.97      0.96        88
+           2       0.95      0.90      0.93        90
+           3       0.99      0.96      0.97        81
+           4       0.99      0.97      0.98        91
+           5       0.97      0.98      0.98       471
+           6       0.97      0.93      0.95        81
+           7       0.98      0.98      0.98        90
+           8       0.92      0.92      0.92        84
+
+    accuracy                           0.96      1161
+   macro avg       0.96      0.95      0.95      1161
+weighted avg       0.96      0.96      0.96      1161
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why you might think: “Oh, that’s awesome, great performance.”, such outcomes are usually perceived as dangerously high and indicate that something is off…</p>
+<div class="tip admonition">
+<p class="admonition-title">Why should a close-to-perfect performance indicate that something is wrong?</p>
+<p>What do you think is the rationale to say that very high <code class="docutils literal notranslate"><span class="pre">scores</span></code> are actually “suspicious” and tells us that something is most likely wrong? Try thinking about the things you’ve learned so far: <code class="docutils literal notranslate"><span class="pre">training</span></code>/<code class="docutils literal notranslate"><span class="pre">test</span></code>/<code class="docutils literal notranslate"><span class="pre">validation</span></code> <code class="docutils literal notranslate"><span class="pre">datasets</span></code> and their size, <code class="docutils literal notranslate"><span class="pre">models</span></code>, <code class="docutils literal notranslate"><span class="pre">predictions</span></code>, etc. .</p>
+</div>
+<p>Luckily, we did <code class="docutils literal notranslate"><span class="pre">split</span></code> our <code class="docutils literal notranslate"><span class="pre">dataset</span></code> into <strong>independent</strong> <code class="docutils literal notranslate"><span class="pre">training</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code> <code class="docutils literal notranslate"><span class="pre">sets</span></code>. So, let’s check our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s performance on the <code class="docutils literal notranslate"><span class="pre">test</span> <span class="pre">set</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model_mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -802,40 +1301,89 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold"> 1/10</span> <span class=" -Color -Color-Green">━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 12ms/step
+</pre></div>
 </div>
-<p>We can have a look at the confusion matrix:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># confusion matrix</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">visualization</span>
-<span class="n">cm_svm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">model_conf_matrix</span> <span class="o">=</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">10/10</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 776us/step
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-<span class="n">visualization</span><span class="o">.</span><span class="n">conf_matrix</span><span class="p">(</span><span class="n">model_conf_matrix</span><span class="p">,</span>
-                          <span class="n">categories</span><span class="p">,</span>
-                          <span class="n">title</span><span class="o">=</span><span class="s1">&#39;MLP decoding results on Haxby&#39;</span><span class="p">)</span>
+           0       0.77      0.87      0.82        23
+           1       0.80      0.80      0.80        20
+           2       0.73      0.61      0.67        18
+           3       0.93      1.00      0.96        27
+           4       0.94      0.88      0.91        17
+           5       0.88      0.91      0.89       117
+           6       0.76      0.48      0.59        27
+           7       0.81      0.94      0.87        18
+           8       0.59      0.67      0.63        24
+
+    accuracy                           0.83       291
+   macro avg       0.80      0.80      0.79       291
+weighted avg       0.83      0.83      0.82       291
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Unfortunately we don’t have a simple way to visualize the important features like we did with the linear SVM! You can check this fantastic <a class="reference external" href="https://distill.pub/2017/feature-visualization/">distill article</a> to learn more about feature visualization in artificial neural networks.</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">scores</span></code>, ie <code class="docutils literal notranslate"><span class="pre">performance</span></code>, drops quite a bit. Do you know why and which you would report, e.g. in a <code class="docutils literal notranslate"><span class="pre">publication</span></code>?</p>
+<p>Beside checking the overall <code class="docutils literal notranslate"><span class="pre">scores</span></code>, there are other options to further evaluate our <code class="docutils literal notranslate"><span class="pre">MLP</span></code>’s (or basically any other model’s) <code class="docutils literal notranslate"><span class="pre">performance</span></code>. One of the most commonly used ones is called <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> (which you most likely have seen before in this course). A <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code> displays how often a given <code class="docutils literal notranslate"><span class="pre">sample</span></code> was <code class="docutils literal notranslate"><span class="pre">predicted</span></code> as a certain <code class="docutils literal notranslate"><span class="pre">label</span></code>, thus, for example, providing insights into differentiability, etc. . To implement this, we initially have to compute the <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">cm_svm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model_conf_matrix</span> <span class="o">=</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">cm_svm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+</div>
+<p>After that, we can <code class="docutils literal notranslate"><span class="pre">plot</span></code> it for evaluation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">df_cm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model_conf_matrix</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">categories</span><span class="p">,</span>
+                     <span class="n">columns</span> <span class="o">=</span> <span class="n">categories</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_cm</span><span class="p">,</span> <span class="n">annot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">square</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MLP decoding results - confusion matrix&#39;</span> <span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;true labels&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;predicted labels&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/15324c77bd7d9b1c3186358692d30b27ee9537e8ef7334bfc08ef7bba18a0f32.png" src="_images/15324c77bd7d9b1c3186358692d30b27ee9537e8ef7334bfc08ef7bba18a0f32.png" />
+</div>
+</div>
+<p>Based on this outcome: how would you interpret the <code class="docutils literal notranslate"><span class="pre">confusion</span> <span class="pre">matrix</span></code>? Are some <code class="docutils literal notranslate"><span class="pre">categories</span></code> better <code class="docutils literal notranslate"><span class="pre">&quot;decodable&quot;</span></code> than others? Could even make such a statement?</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>With that, we already reached the end of this <code class="docutils literal notranslate"><span class="pre">tutorial</span></code> within which we talked about how to <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">train</span></code> and <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> a <code class="docutils literal notranslate"><span class="pre">MLP</span></code> as one possible <code class="docutils literal notranslate"><span class="pre">decoding</span> <span class="pre">model</span></code> that can be applied to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code>. As mentioned before, the <code class="docutils literal notranslate"><span class="pre">MLP</span></code> utilized here is rather simple and <code class="docutils literal notranslate"><span class="pre">models</span></code> you see (and maybe use) out in the “real world” will most likely be way more complex. However, their application to <code class="docutils literal notranslate"><span class="pre">brain</span> <span class="pre">data</span></code> concerning <code class="docutils literal notranslate"><span class="pre">input</span></code>, <code class="docutils literal notranslate"><span class="pre">hidden</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layers</span></code> follows the same outline.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Unfortunately, visualizing the features/transformations of an <code class="docutils literal notranslate"><span class="pre">ANN</span></code> is quite often not straightforward as it depends on the given <code class="docutils literal notranslate"><span class="pre">ANN</span></code> architecture. However, you can check this fantastic
+<a class="reference external" href="https://distill.pub/2017/feature-visualization/">distill article</a> to learn more about <code class="docutils literal notranslate"><span class="pre">feature</span> <span class="pre">visualization</span></code> in <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">neural</span> <span class="pre">networks</span></code>.</p>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>What is the most difficult category to decode? Why?</p></li>
 <li><p>The model seemed to overfit. Try adding a <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> layer to regularize the model. You can read about dropout in keras in this <a class="reference external" href="https://towardsdatascience.com/machine-learning-part-20-dropout-keras-layers-explained-8c9f6dc4c9ab">blog post</a>.</p></li>
 <li><p>Try to add layers or hidden units, and observe the impact on overfitting and training time.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -849,7 +1397,7 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -857,42 +1405,109 @@ In this tutorial, we are going to train the simplest MLP architecture featuring 
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="svm_decoding.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Brain decoding with SVM</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="svm_decoding.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Brain decoding with SVM</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="gcn_decoding.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="gcn_decoding.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Brain decoding with GCN</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-        &copy; Copyright 2022.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-motivation">Theoretical motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-data">Getting the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-model">Training a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-performance">Assessing performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The MAIN Educational Team
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
